@@ -1,0 +1,30 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Wonder Linx illustration">
+  <rect width="1200" height="900" fill="#ffffff"/>
+  <g fill="none" stroke="#d9dee7" stroke-width="2">
+    <path d="M120 220H1080"/>
+    <path d="M120 320H1080"/>
+    <path d="M120 420H1080"/>
+    <path d="M120 520H1080"/>
+    <path d="M120 620H1080"/>
+  </g>
+  <g fill="none" stroke="#2380f1" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M180 620h130l110-120h160l120 80h140l120-180h100"/>
+    <path d="M220 300h150l80 60h140l90-120h190" opacity="0.35"/>
+  </g>
+  <g fill="#f5f7fb" stroke="#2e3542" stroke-width="3">
+    <rect x="250" y="180" width="220" height="130" rx="18"/>
+    <rect x="600" y="250" width="260" height="150" rx="18"/>
+    <rect x="420" y="470" width="220" height="120" rx="18"/>
+    <rect x="840" y="520" width="200" height="110" rx="18"/>
+  </g>
+  <g fill="#2380f1">
+    <circle cx="180" cy="620" r="12"/>
+    <circle cx="310" cy="620" r="12"/>
+    <circle cx="420" cy="500" r="12"/>
+    <circle cx="580" cy="500" r="12"/>
+    <circle cx="700" cy="580" r="12"/>
+    <circle cx="840" cy="580" r="12"/>
+    <circle cx="960" cy="400" r="12"/>
+    <circle cx="1060" cy="400" r="12"/>
+  </g>
+</svg>

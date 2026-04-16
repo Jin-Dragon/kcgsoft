@@ -1,0 +1,8 @@
+KCGsoftt homepage server running on http://localhost:3000
+[smtp] connecting without STARTTLS to smtp.cafe24.com 587
+[smtp] greeting: 220 ESMTP Postfix
+[smtp] ehlo: 250-smtp-002.cafe24.com | 250-PIPELINING | 250-SIZE 30720000 | 250-VRFY | 250-ETRN | 250-STARTTLS | 250-AUTH PLAIN LOGIN | 250-AUTH=PLAIN LOGIN | 250-ENHANCEDSTATUSCODES | 250-8BITMIME | 250 DSN
+[smtp] auth login: 334 VXNlcm5hbWU6
+[smtp] auth login user: 334 UGFzc3dvcmQ6
+
+

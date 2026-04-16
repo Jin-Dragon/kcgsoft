@@ -1,0 +1,24 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Catchloc illustration">
+  <rect width="1200" height="900" fill="#ffffff"/>
+  <g fill="none" stroke="#d9dee7" stroke-width="2">
+    <path d="M150 230H1050"/>
+    <path d="M150 330H1050"/>
+    <path d="M150 430H1050"/>
+    <path d="M150 530H1050"/>
+    <path d="M150 630H1050"/>
+  </g>
+  <g fill="none" stroke="#e7437b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M240 590c90-120 170-180 280-180s170 90 250 90 140-50 220-150"/>
+    <path d="M250 650c120-60 180-120 290-120 130 0 200 70 300 70 100 0 170-40 230-110" opacity="0.35"/>
+  </g>
+  <g fill="#f5f7fb" stroke="#2e3542" stroke-width="3">
+    <rect x="300" y="190" width="240" height="160" rx="20"/>
+    <rect x="670" y="230" width="250" height="150" rx="20"/>
+    <rect x="470" y="500" width="220" height="130" rx="20"/>
+  </g>
+  <g>
+    <path d="M760 520c-32 0-58 26-58 58 0 44 58 102 58 102s58-58 58-102c0-32-26-58-58-58zm0 80a22 22 0 1 1 0-44 22 22 0 0 1 0 44z" fill="#e7437b"/>
+    <circle cx="760" cy="578" r="50" fill="#e7437b" opacity="0.15"/>
+    <circle cx="760" cy="578" r="84" fill="#e7437b" opacity="0.08"/>
+  </g>
+</svg>

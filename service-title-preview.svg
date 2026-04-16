@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="KCGsoft service title preview">
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <defs>
+    <style>
+      .kicker{font:700 15px 'Space Grotesk', Arial, sans-serif; letter-spacing:.14em; fill:#3e202a}
+      .title{font:700 66px 'Space Grotesk', 'Noto Sans KR', sans-serif; fill:#111111}
+      .body{font:400 22px 'Noto Sans KR', Arial, sans-serif; fill:#3e202a}
+      .mini{font:500 14px 'Noto Sans KR', Arial, sans-serif; fill:#3e202a}
+      .tag{font:700 13px 'Space Grotesk', Arial, sans-serif; letter-spacing:.08em; fill:#111111}
+      .node{font:700 16px 'Space Grotesk', 'Noto Sans KR', sans-serif; fill:#111111}
+      .arrow{stroke:#85b92a; stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="900" fill="#fbfbf9"/>
+  <rect x="64" y="64" width="1472" height="772" fill="#ffffff" stroke="#d9dee7"/>
+
+  <rect x="120" y="138" width="42" height="4" fill="#e7437b"/>
+  <text x="120" y="192" class="kicker">INDEX / CORE SERVICES</text>
+  <text x="120" y="272" class="title">KCGsoft 핵심 서비스 라인업</text>
+  <text x="120" y="322" class="body">운영이 필요한 이동 서비스와 현장 데이터를</text>
+  <text x="120" y="356" class="body">하나의 흐름으로 정리합니다.</text>
+
+  <g transform="translate(120 430)">
+    <text x="0" y="0" class="tag">OPERATING FLOW</text>
+    <path d="M0 26H1320" class="arrow"/>
+
+    <g transform="translate(0 52)">
+      <rect width="240" height="112" fill="#ffffff" stroke="#e3e7ee"/>
+      <text x="20" y="34" class="mini">01</text>
+      <text x="20" y="66" class="node">노선 디자인</text>
+      <text x="20" y="90" class="mini">Wonder Linx</text>
+    </g>
+
+    <path d="M240 108H300" class="arrow"/>
+
+    <g transform="translate(300 52)">
+      <rect width="300" height="112" fill="#ffffff" stroke="#e3e7ee"/>
+      <text x="20" y="34" class="mini">02</text>
+      <text x="20" y="66" class="node">버스 위치 추적</text>
+      <text x="20" y="90" class="mini">GPS + 탑승자앱 / Wonder Shuttle</text>
+    </g>
+
+    <path d="M600 108H660" class="arrow"/>
+
+    <g transform="translate(660 52)">
+      <rect width="300" height="112" fill="#ffffff" stroke="#e3e7ee"/>
+      <text x="20" y="34" class="mini">03</text>
+      <text x="20" y="66" class="node">노선 효율화</text>
+      <text x="20" y="90" class="mini">증감차 · 정류장 · 데이터 기반 조정</text>
+    </g>
+
+    <path d="M960 108H1020" class="arrow"/>
+
+    <g transform="translate(1020 52)">
+      <rect width="240" height="112" fill="#ffffff" stroke="#e3e7ee"/>
+      <text x="20" y="34" class="mini">04</text>
+      <text x="20" y="66" class="node">ERP 데이터화</text>
+      <text x="20" y="90" class="mini">Wonder FMS</text>
+    </g>
+
+    <path d="M1260 108H1320" class="arrow"/>
+
+    <g transform="translate(1320 52)">
+      <rect width="240" height="112" fill="#ffffff" stroke="#e3e7ee"/>
+      <text x="20" y="34" class="mini">05</text>
+      <text x="20" y="66" class="node">운영 효율 완성</text>
+      <text x="20" y="90" class="mini">데이터 기반 운영 최적화</text>
+    </g>
+  </g>
+
+  <text x="120" y="792" class="kicker">SMALL / READABLE / FLOW FIRST</text>
+</svg>

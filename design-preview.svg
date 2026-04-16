@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 3600" role="img" aria-label="KCGsoftt homepage design preview">
+  <rect width="1600" height="3600" fill="#ffffff"/>
+  <defs>
+    <style>
+      .h1{font:700 58px/1.05 'Space Grotesk', Arial, sans-serif; fill:#111111}
+      .h2{font:700 44px/1.08 'Space Grotesk', Arial, sans-serif; fill:#111111}
+      .h3{font:700 30px/1.1 'Space Grotesk', Arial, sans-serif; fill:#111111}
+      .body{font:400 22px/1.7 'Noto Sans KR', Arial, sans-serif; fill:#3e202a}
+      .small{font:700 16px/1.2 'Space Grotesk', Arial, sans-serif; fill:#3e202a; letter-spacing:.12em}
+      .chip{font:700 17px/1.1 'Space Grotesk', Arial, sans-serif; fill:#111111; letter-spacing:.08em}
+      .label{font:700 20px/1.1 'Space Grotesk', Arial, sans-serif; fill:#111111; letter-spacing:.1em}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="120" fill="#ffffff"/>
+  <line x1="64" y1="120" x2="1536" y2="120" stroke="#d9dee7" stroke-width="2"/>
+  <text x="72" y="72" class="h3">KCGsoftt</text>
+  <text x="220" y="56" class="small">MOBILITY TECHNOLOGY PARTNER</text>
+  <text x="1230" y="70" class="chip">Services</text>
+  <text x="1328" y="70" class="chip">Capability</text>
+  <text x="1448" y="70" class="chip">Company</text>
+  <text x="1532" y="70" text-anchor="end" class="chip">Contact</text>
+
+  <rect x="64" y="180" width="1472" height="760" fill="#ffffff" stroke="#e3e7ee" stroke-width="2"/>
+  <rect x="540" y="210" width="996" height="700" rx="12" fill="#fafafa"/>
+  <g opacity="0.75">
+    <rect x="980" y="340" width="250" height="110" rx="18" fill="#f7f8fb" stroke="#d9dee7"/>
+    <rect x="1150" y="310" width="220" height="90" rx="18" fill="#f7f8fb" stroke="#d9dee7"/>
+    <rect x="1010" y="620" width="280" height="110" rx="18" fill="#f7f8fb" stroke="#d9dee7"/>
+    <path d="M720 670c140-120 220-160 360-160 130 0 200 70 290 70 80 0 150-40 220-120" fill="none" stroke="#c6cfdb" stroke-width="4"/>
+    <path d="M690 560c140-120 250-160 370-160 150 0 210 90 330 90 90 0 170-40 240-120" fill="none" stroke="#c6cfdb" stroke-width="4"/>
+    <circle cx="760" cy="660" r="20" fill="#32b154" opacity=".14"/>
+    <circle cx="1090" cy="480" r="20" fill="#2380f1" opacity=".14"/>
+    <circle cx="1270" cy="700" r="20" fill="#1b3479" opacity=".14"/>
+    <circle cx="1370" cy="560" r="20" fill="#4f86f7" opacity=".14"/>
+  </g>
+  <text x="120" y="290" class="small">KCGsoftt / Seoul / Urban Mobility Systems</text>
+  <text x="120" y="390" class="h1">KCGsoftt는 도시 이동의 새로운 기준을</text>
+  <text x="120" y="456" class="h1" fill="#2d2736">만들어갑니다.</text>
+  <rect x="120" y="520" width="360" height="166" fill="#ffffff" stroke="#d9dee7"/>
+  <text x="144" y="555" class="small">CURRENT FOCUS</text>
+  <text x="144" y="595" class="body">운영 가능한 서비스 구조, 현장 프로세스,</text>
+  <text x="144" y="628" class="body">위치 데이터, 접근 권한 제어를 하나의</text>
+  <text x="144" y="661" class="body">시스템으로 연결합니다.</text>
+  <rect x="120" y="722" width="165" height="58" rx="2" fill="#e7437b"/>
+  <text x="202" y="758" text-anchor="middle" style="font:700 18px 'Space Grotesk', Arial, sans-serif; fill:#ffffff">Start a Project</text>
+
+  <rect x="64" y="960" width="1472" height="72" fill="#ffffff" stroke="#e3e7ee"/>
+  <line x1="358" y1="960" x2="358" y2="1032" stroke="#e3e7ee"/>
+  <line x1="653" y1="960" x2="653" y2="1032" stroke="#e3e7ee"/>
+  <line x1="949" y1="960" x2="949" y2="1032" stroke="#e3e7ee"/>
+  <line x1="1244" y1="960" x2="1244" y2="1032" stroke="#e3e7ee"/>
+  <text x="211" y="1006" text-anchor="middle" class="chip">WONDER SHUTTLE</text>
+  <text x="506" y="1006" text-anchor="middle" class="chip">WONDER LINX</text>
+  <text x="801" y="1006" text-anchor="middle" class="chip">WONDER HYDRO</text>
+  <text x="1097" y="1006" text-anchor="middle" class="chip">WONDER OPS</text>
+  <text x="1390" y="1006" text-anchor="middle" class="chip">CATCHLOC</text>
+
+  <text x="64" y="1120" class="small">INDEX / SERVICES</text>
+  <text x="64" y="1190" class="h2">KCGsoftt가 서비스 중인 솔루션</text>
+  <text x="64" y="1240" class="body">이미지와 텍스트를 교차 배치하고, 각 서비스명만 테마색 라인으로 강조하는 방식입니다.</text>
+
+  <g transform="translate(64 1320)">
+    <rect width="1472" height="360" fill="#ffffff" stroke="#d9dee7"/>
+    <rect x="88" y="24" width="620" height="312" fill="#fbfcfe" stroke="#d9dee7"/>
+    <text x="398" y="188" text-anchor="middle" style="font:700 28px 'Space Grotesk', Arial, sans-serif; fill:#32b154">[ 이미지 ]</text>
+    <line x1="752" y1="70" x2="1000" y2="70" stroke="#32b154" stroke-width="5"/>
+    <text x="752" y="118" class="label" fill="#32b154">WONDER SHUTTLE</text>
+    <text x="752" y="184" class="h3">버스 통합 관제 서비스</text>
+    <text x="752" y="240" class="body">버스 실시간 위치 확인, 노선관리, 운행관리, 탑승관리, 배차관리, 통계관리를 제공하는 통합 관제 서비스입니다.</text>
+  </g>
+
+  <g transform="translate(64 1720)">
+    <rect width="1472" height="360" fill="#ffffff" stroke="#d9dee7"/>
+    <rect x="892" y="24" width="620" height="312" fill="#fbfcfe" stroke="#d9dee7"/>
+    <text x="1202" y="188" text-anchor="middle" style="font:700 28px 'Space Grotesk', Arial, sans-serif; fill:#2380f1">[ 이미지 ]</text>
+    <line x1="164" y1="70" x2="412" y2="70" stroke="#2380f1" stroke-width="5"/>
+    <text x="164" y="118" class="label" fill="#2380f1">WONDER LINX</text>
+    <text x="164" y="184" class="h3">지능형 버스 노선 설계 프로그램</text>
+    <text x="164" y="240" class="body">노선 분석, 수정, 최적경로, 예상 운행시간까지 계산해 더 정교한 노선 설계를 돕는 프로그램입니다.</text>
+  </g>
+
+  <g transform="translate(64 2120)">
+    <rect width="1472" height="360" fill="#ffffff" stroke="#d9dee7"/>
+    <rect x="88" y="24" width="620" height="312" fill="#fbfcfe" stroke="#d9dee7"/>
+    <text x="398" y="188" text-anchor="middle" style="font:700 28px 'Space Grotesk', Arial, sans-serif; fill:#1b3479">[ 이미지 ]</text>
+    <line x1="752" y1="70" x2="980" y2="70" stroke="#1b3479" stroke-width="5"/>
+    <text x="752" y="118" class="label" fill="#1b3479">WONDER HYDRO</text>
+    <text x="752" y="184" class="h3">수소 충전 통합 관리 프로그램</text>
+    <text x="752" y="240" class="body">수소 충전 운영을 한 화면에서 관리하고 추적할 수 있도록 구성한 통합 관리 프로그램입니다.</text>
+  </g>
+
+  <g transform="translate(64 2520)">
+    <rect width="1472" height="360" fill="#ffffff" stroke="#d9dee7"/>
+    <rect x="892" y="24" width="620" height="312" fill="#fbfcfe" stroke="#d9dee7"/>
+    <text x="1202" y="188" text-anchor="middle" style="font:700 28px 'Space Grotesk', Arial, sans-serif; fill:#4f86f7">[ 이미지 ]</text>
+    <line x1="164" y1="70" x2="390" y2="70" stroke="#4f86f7" stroke-width="5"/>
+    <text x="164" y="118" class="label" fill="#4f86f7">WONDER OPS</text>
+    <text x="164" y="184" class="h3">전세버스 ERP 통합 관리 프로그램</text>
+    <text x="164" y="240" class="body">운영과 회계, 배차, 정산 흐름을 하나로 연결하는 전세버스 회사 전용 ERP 프로그램입니다.</text>
+  </g>
+
+  <g transform="translate(64 2920)">
+    <rect width="1472" height="360" fill="#ffffff" stroke="#d9dee7"/>
+    <rect x="88" y="24" width="620" height="312" fill="#fbfcfe" stroke="#d9dee7"/>
+    <text x="398" y="188" text-anchor="middle" style="font:700 28px 'Space Grotesk', Arial, sans-serif; fill:#e7437b">[ 이미지 ]</text>
+    <line x1="752" y1="70" x2="936" y2="70" stroke="#e7437b" stroke-width="5"/>
+    <text x="752" y="118" class="label" fill="#e7437b">CATCHLOC</text>
+    <text x="752" y="184" class="h3">GPS 위치 추적 통합 솔루션</text>
+    <text x="752" y="240" class="body">차량과 자산의 위치를 실시간으로 확인하고 이동 이력을 관리할 수 있는 GPS 추적 솔루션입니다.</text>
+  </g>
+</svg>
+

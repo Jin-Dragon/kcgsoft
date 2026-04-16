@@ -1,0 +1,28 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Wonder Hydro illustration">
+  <rect width="1200" height="900" fill="#ffffff"/>
+  <g fill="none" stroke="#d9dee7" stroke-width="2">
+    <path d="M180 220H1020"/>
+    <path d="M180 320H1020"/>
+    <path d="M180 420H1020"/>
+    <path d="M180 520H1020"/>
+    <path d="M180 620H1020"/>
+  </g>
+  <g fill="none" stroke="#1b3479" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M300 610h120l90-120h160l80 90h180l100-160"/>
+    <path d="M360 320h120l90 80h140l120-120" opacity="0.32"/>
+  </g>
+  <g fill="#f5f7fb" stroke="#2e3542" stroke-width="3">
+    <rect x="330" y="180" width="230" height="150" rx="18"/>
+    <rect x="640" y="220" width="260" height="170" rx="18"/>
+    <rect x="500" y="500" width="250" height="130" rx="20"/>
+  </g>
+  <g>
+    <path d="M740 560c-28-46 8-92 52-92s80 46 52 92c-14 24-32 44-52 68-20-24-38-44-52-68z" fill="#1b3479"/>
+    <circle cx="792" cy="520" r="22" fill="#ffffff" opacity="0.9"/>
+    <rect x="735" y="430" width="114" height="64" rx="18" fill="#eaf3ff" stroke="#1b3479" stroke-width="4"/>
+  </g>
+  <g>
+    <circle cx="420" cy="540" r="18" fill="#1b3479" opacity="0.18"/>
+    <circle cx="940" cy="320" r="18" fill="#1b3479" opacity="0.18"/>
+  </g>
+</svg>

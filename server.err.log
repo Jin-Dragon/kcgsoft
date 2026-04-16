@@ -1,0 +1,12 @@
+[smtp] auth plain failed: Error: AUTH PLAIN failed: 535 5.7.8 Error: authentication failed: generic failure
+    at assertExpected (D:\kcgsoft_homepage\server.js:179:11)
+    at completeSmtpConversation (D:\kcgsoft_homepage\server.js:210:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async sendMail (D:\kcgsoft_homepage\server.js:295:3)
+    at async Server.<anonymous> (D:\kcgsoft_homepage\server.js:345:7)
+[contact] failed: Error: SMTP password failed: 535 5.7.8 Error: authentication failed: generic failure
+    at assertExpected (D:\kcgsoft_homepage\server.js:179:11)
+    at completeSmtpConversation (D:\kcgsoft_homepage\server.js:224:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async sendMail (D:\kcgsoft_homepage\server.js:295:3)
+    at async Server.<anonymous> (D:\kcgsoft_homepage\server.js:345:7)
