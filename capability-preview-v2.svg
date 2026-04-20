@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <style>
+      .bg { fill: #fbfbf9; }
+      .ink { fill: #111111; font-family: "Noto Sans KR", "Space Grotesk", sans-serif; }
+      .muted { fill: #616161; font-family: "Noto Sans KR", sans-serif; }
+      .kicker { font-size: 18px; letter-spacing: 0.18em; font-weight: 700; }
+      .headline { font-size: 64px; font-weight: 800; letter-spacing: -0.05em; }
+      .sub { font-size: 22px; line-height: 1.7; }
+      .card-title { font-size: 25px; font-weight: 800; letter-spacing: -0.04em; }
+      .card-sub { font-size: 17px; line-height: 1.55; }
+      .label { font-size: 16px; font-weight: 700; letter-spacing: 0.08em; }
+      .small { font-size: 15px; }
+      .btn { font-size: 16px; font-weight: 700; }
+    </style>
+    <linearGradient id="softLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2380f1" stop-opacity="0.26"/>
+      <stop offset="28%" stop-color="#32b154" stop-opacity="0.26"/>
+      <stop offset="56%" stop-color="#1b3479" stop-opacity="0.26"/>
+      <stop offset="78%" stop-color="#efbb45" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#e7437b" stop-opacity="0.26"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" width="1600" height="1000"/>
+
+  <path d="M0 120C280 52 510 52 780 120C1040 185 1290 186 1600 112V0H0V120Z" fill="#f3f4ef"/>
+  <path d="M0 1000V860C280 798 540 796 788 852C1070 916 1310 916 1600 854V1000H0Z" fill="#f6f2ec"/>
+
+  <g transform="translate(112 94)">
+    <text class="ink kicker" x="0" y="0">CAPABILITY / WHY KCGSOFT</text>
+    <text class="ink headline" x="0" y="74">버스 운영의 핵심 문제를</text>
+    <text class="ink headline" x="0" y="150">한 번에 묶는 솔루션</text>
+    <text class="muted sub" x="0" y="212">
+      <tspan x="0" dy="0">차량관제, 내부 ERP 연동, 연료 충전 데이터,</tspan>
+      <tspan x="0" dy="34">노선 설계를 따로 보지 않고 하나의 운영 언어로 연결합니다.</tspan>
+    </text>
+
+    <g transform="translate(0 272)">
+      <rect x="0" y="0" width="620" height="1" fill="url(#softLine)"/>
+      <g transform="translate(0 22)">
+        <rect x="0" y="0" width="118" height="34" rx="0" fill="#ffffff" stroke="#2380f1" stroke-width="1.25"/>
+        <text class="ink label" x="18" y="23" fill="#2380f1">관제</text>
+        <rect x="128" y="0" width="118" height="34" rx="0" fill="#ffffff" stroke="#32b154" stroke-width="1.25"/>
+        <text class="ink label" x="146" y="23" fill="#32b154">ERP</text>
+        <rect x="256" y="0" width="132" height="34" rx="0" fill="#ffffff" stroke="#1b3479" stroke-width="1.25"/>
+        <text class="ink label" x="274" y="23" fill="#1b3479">충전 데이터</text>
+        <rect x="398" y="0" width="138" height="34" rx="0" fill="#ffffff" stroke="#efbb45" stroke-width="1.25"/>
+        <text class="ink label" x="416" y="23" fill="#a57c06">노선 설계</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(920 110)" filter="url(#shadow)">
+    <rect x="0" y="0" width="560" height="420" fill="#ffffff" stroke="#111111" stroke-width="1.2"/>
+    <rect x="30" y="30" width="500" height="66" fill="#fbfbf9" stroke="#e5e5e5"/>
+    <text class="ink label" x="54" y="61" fill="#2380f1">BUS OPERATING SYSTEM</text>
+    <text class="ink" x="54" y="85" style="font-size:20px;font-weight:700;letter-spacing:-0.03em;">한 화면에서 함께 보는 운영 맥락</text>
+
+    <g transform="translate(44 132)">
+      <rect x="0" y="0" width="472" height="48" fill="#ffffff" stroke="#d8d8d8"/>
+      <rect x="0" y="0" width="14" height="48" fill="#2380f1"/>
+      <text class="ink small" x="26" y="31">차량관제 서비스</text>
+      <text class="muted small" x="308" y="31">실시간 상태 · 위치</text>
+
+      <rect x="0" y="62" width="472" height="48" fill="#ffffff" stroke="#d8d8d8"/>
+      <rect x="0" y="62" width="14" height="48" fill="#32b154"/>
+      <text class="ink small" x="26" y="93">내부 ERP 연동</text>
+      <text class="muted small" x="308" y="93">배차 · 정산 · 이력</text>
+
+      <rect x="0" y="124" width="472" height="48" fill="#ffffff" stroke="#d8d8d8"/>
+      <rect x="0" y="124" width="14" height="48" fill="#1b3479"/>
+      <text class="ink small" x="26" y="155">충전 운영 데이터</text>
+      <text class="muted small" x="308" y="155">수소 충전 · 현장 기록</text>
+
+      <rect x="0" y="186" width="472" height="48" fill="#ffffff" stroke="#d8d8d8"/>
+      <rect x="0" y="186" width="14" height="48" fill="#efbb45"/>
+      <text class="ink small" x="26" y="217">데이터 기반 노선 설계</text>
+      <text class="muted small" x="308" y="217">노선 효율 · 정류장 판단</text>
+    </g>
+
+    <g transform="translate(30 354)">
+      <rect x="0" y="0" width="500" height="34" fill="#111111"/>
+      <text class="ink btn" x="20" y="23" fill="#ffffff">버스회사 운영 문제를 한 번에 정리</text>
+    </g>
+  </g>
+
+  <g transform="translate(112 590)">
+    <text class="ink" x="0" y="0" style="font-size:26px;font-weight:800;letter-spacing:-0.04em;">핵심 제공 영역</text>
+    <text class="muted" x="0" y="36" style="font-size:17px;">제품 소개는 한 장으로 읽히고, 각 서비스는 독립적으로 선택할 수 있는 방식</text>
+  </g>
+
+  <g transform="translate(112 646)">
+    <g transform="translate(0 0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="278" height="214" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="278" height="5" fill="#2380f1"/>
+      <text class="ink label" x="20" y="42" fill="#2380f1">WONDER LINX</text>
+      <text class="ink card-title" x="20" y="80">지능형 노선 설계</text>
+      <text class="muted card-sub" x="20" y="114">
+        <tspan x="20" dy="0">데이터를 기반으로</tspan>
+        <tspan x="20" dy="28">효율적인 노선을 설계합니다.</tspan>
+      </text>
+      <rect x="20" y="156" width="108" height="34" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <text class="ink btn" x="39" y="179">자세히 보기</text>
+    </g>
+
+    <g transform="translate(298 0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="278" height="214" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="278" height="5" fill="#32b154"/>
+      <text class="ink label" x="20" y="42" fill="#32b154">WONDER SHUTTLE</text>
+      <text class="ink card-title" x="20" y="80">차량관제 서비스</text>
+      <text class="muted card-sub" x="20" y="114">
+        <tspan x="20" dy="0">실시간 위치와 탑승 데이터</tspan>
+        <tspan x="20" dy="28">를 함께 봅니다.</tspan>
+      </text>
+      <rect x="20" y="156" width="108" height="34" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <text class="ink btn" x="39" y="179">자세히 보기</text>
+    </g>
+
+    <g transform="translate(596 0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="278" height="214" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="278" height="5" fill="#1b3479"/>
+      <text class="ink label" x="20" y="42" fill="#1b3479">WONDER HYDRO</text>
+      <text class="ink card-title" x="20" y="80">충전 운영 데이터</text>
+      <text class="muted card-sub" x="20" y="114">
+        <tspan x="20" dy="0">수소 충전 현장 데이터를</tspan>
+        <tspan x="20" dy="28">운영 흐름에 연결합니다.</tspan>
+      </text>
+      <rect x="20" y="156" width="108" height="34" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <text class="ink btn" x="39" y="179">자세히 보기</text>
+    </g>
+  </g>
+
+  <g transform="translate(112 878)">
+    <g transform="translate(0 0)" filter="url(#shadow)">
+      <rect x="0" y="0" width="878" height="82" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="16" height="82" fill="#efbb45"/>
+      <text class="ink label" x="28" y="31" fill="#efbb45">WONDER FMS</text>
+      <text class="ink" x="28" y="61" style="font-size:24px;font-weight:800;letter-spacing:-0.04em;">내부 ERP와 운영 데이터를 한 번에 정리</text>
+      <rect x="742" y="23" width="112" height="36" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <text class="ink btn" x="760" y="47">자세히 보기</text>
+    </g>
+  </g>
+</svg>

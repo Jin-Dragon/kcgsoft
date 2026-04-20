@@ -59,12 +59,20 @@ const contactStatus = document.querySelector('[data-contact-status]');
 const contactOpenButtons = document.querySelectorAll('[data-contact-open]');
 const contactCloseTargets = document.querySelectorAll('[data-contact-close]');
 const tickerLinks = Array.from(document.querySelectorAll('.ticker-link'));
-const tickerSections = Array.from(document.querySelectorAll('.solution-section[id]'));
 const siteHeader = document.querySelector('.site-header');
 const serviceNavSticky = document.querySelector('.service-nav-sticky');
 const serviceRouteTrack = document.querySelector('.service-route-track');
 const serviceRouteBus = document.querySelector('.service-route-bus');
 const serviceRouteStops = Array.from(document.querySelectorAll('.service-route-stop'));
+const serviceAtlasSection = document.querySelector('.services-section');
+const serviceAtlasPreview = document.querySelector('[data-service-preview]');
+const serviceAtlasPreviewTag = document.querySelector('.service-atlas-preview-tag');
+const serviceAtlasPreviewTitle = document.querySelector('.service-atlas-preview-title');
+const serviceAtlasPreviewText = document.querySelector('.service-atlas-preview-text');
+const serviceAtlasPreviewBtn = document.querySelector('[data-atlas-detail-open]');
+const serviceAtlasPills = document.querySelector('.service-atlas-pills');
+
+const serviceAtlasOrder = ['wonder-shuttle', 'wonder-linx', 'wonder-hydro', 'wonder-fms', 'catchloc'];
 
 let openedKey = null;
 let activePageIndex = 0;
@@ -73,10 +81,16 @@ let tickerObserver = null;
 let tickerFlashTimer = 0;
 let serviceRailRaf = 0;
 let serviceRailSnapTimer = 0;
+let atlasWheelLock = 0;
+let atlasWheelUnlockTimer = 0;
+let atlasTransitionTimer = 0;
+let atlasWheelActive = false;
 let contactSubmitLock = false;
 let detailWheelLock = false;
 let detailWheelUnlockTimer = 0;
 let routeDragState = null;
+let selectedAtlasKey = 'wonder-shuttle';
+let selectedAtlasIndex = Math.max(0, serviceAtlasOrder.indexOf(selectedAtlasKey));
 const contactApiUrl = window.location.protocol === 'file:'
   ? 'http://localhost:3000/api/contact'
   : new URL('/api/contact', window.location.origin).toString();
@@ -89,6 +103,38 @@ const tickerAccentMap = {
   'wonder-hydro': serviceData['wonder-hydro'].accent,
   'wonder-fms': serviceData['wonder-fms'].accent,
   catchloc: serviceData.catchloc.accent
+};
+const serviceAtlasMeta = {
+  'wonder-linx': {
+    tag: '데이터 기반 지능형 노선 설계',
+    title: 'Wonder Linx',
+    text: '노선 분석, 수정, 최적경로, 예상 운행시간까지 계산해 더 정교한 노선 설계를 돕는 서비스입니다.',
+    pills: ['노선 분석', '최적 경로', '운행 시간']
+  },
+  'wonder-shuttle': {
+    tag: '버스 통합 관제 서비스',
+    title: 'Wonder Shuttle',
+    text: '실시간 위치, 노선 운영, 탑승 관리를 하나의 화면에서 확인하는 운영 솔루션입니다.',
+    pills: ['실시간 위치', '노선 관리', '탑승 데이터']
+  },
+  'wonder-hydro': {
+    tag: '수소 충전 통합 관리',
+    title: 'Wonder Hydro',
+    text: '충전 상태, 이력, 운영 흐름을 한 화면에서 관리하는 프로그램입니다.',
+    pills: ['충전 상태', '이력 관리', '현장 운영']
+  },
+  'wonder-fms': {
+    tag: '전세버스 ERP 통합 관리',
+    title: 'Wonder FMS',
+    text: '운영, 배차, 정산을 하나로 묶어 전세버스 업무를 정리하는 ERP 서비스입니다.',
+    pills: ['ERP 통합', '배차 관리', '정산 흐름']
+  },
+  catchloc: {
+    tag: 'GPS 위치 추적 솔루션',
+    title: 'Catchloc',
+    text: '차량과 자산의 위치를 실시간으로 확인하고 이동 이력과 상태를 관리하는 구조입니다.',
+    pills: ['GPS 추적', '이동 이력', '상태 관리']
+  }
 };
 
 function setHeroSlide(index) {
@@ -119,7 +165,8 @@ function syncHeaderOffset() {
 function setTickerActive(id) {
   if (!tickerLinks.length) return;
   tickerLinks.forEach((link) => {
-    const isActive = link.getAttribute('href') === `#${id}`;
+    const linkKey = link.dataset.service || link.getAttribute('href')?.slice(1);
+    const isActive = linkKey === id;
     link.classList.toggle('is-active', isActive);
     link.setAttribute('aria-current', isActive ? 'true' : 'false');
   });
@@ -127,7 +174,7 @@ function setTickerActive(id) {
 
 function applyTickerAccents() {
   tickerLinks.forEach((link) => {
-    const targetId = link.getAttribute('href')?.slice(1);
+    const targetId = link.dataset.service || link.getAttribute('href')?.slice(1);
     const accent = targetId ? tickerAccentMap[targetId] : null;
     if (accent) {
       link.style.setProperty('--ticker-accent', accent);
@@ -141,6 +188,79 @@ function applyTickerAccents() {
       stop.style.setProperty('--stop-accent', accent);
     }
   });
+}
+
+function getAtlasIndex(key) {
+  return Math.max(0, serviceAtlasOrder.indexOf(key));
+}
+
+function getAtlasKey(index) {
+  return serviceAtlasOrder[Math.max(0, Math.min(index, serviceAtlasOrder.length - 1))] || serviceAtlasOrder[0];
+}
+
+function syncAtlasRail(key, mode = 'snap') {
+  if (!serviceNavSticky || !serviceRouteStops.length) return;
+
+  const index = getAtlasIndex(key);
+  const stopPositions = getServiceStopPositions();
+  const position = stopPositions[index] ?? 0;
+  applyServiceRailState(position, index, mode);
+}
+
+function updateAtlasPreview(key, options = {}) {
+  const meta = serviceAtlasMeta[key];
+  if (!meta || !serviceAtlasPreview) return;
+  const syncRail = options.syncRail !== false;
+  const animate = options.animate !== false;
+
+  if (atlasTransitionTimer) {
+    clearTimeout(atlasTransitionTimer);
+    atlasTransitionTimer = 0;
+  }
+
+  selectedAtlasKey = key;
+  selectedAtlasIndex = getAtlasIndex(key);
+  serviceAtlasPreview.style.setProperty('--preview-accent', tickerAccentMap[key] || '#2380f1');
+  setTickerActive(key);
+
+  const applyMeta = () => {
+    if (serviceAtlasPreviewTag) {
+      serviceAtlasPreviewTag.textContent = meta.tag;
+    }
+    if (serviceAtlasPreviewTitle) {
+      serviceAtlasPreviewTitle.textContent = meta.title;
+    }
+    if (serviceAtlasPreviewText) {
+      serviceAtlasPreviewText.textContent = meta.text;
+    }
+    if (serviceAtlasPills) {
+      const pills = serviceAtlasPills.querySelectorAll('span');
+      pills.forEach((pill, index) => {
+        pill.textContent = meta.pills[index] || '';
+      });
+    }
+    if (serviceAtlasPreviewBtn) {
+      serviceAtlasPreviewBtn.dataset.detailKey = key;
+    }
+  };
+
+  if (animate) {
+    serviceAtlasPreview.classList.add('is-transitioning');
+    atlasTransitionTimer = window.setTimeout(() => {
+      applyMeta();
+      requestAnimationFrame(() => {
+        serviceAtlasPreview.classList.remove('is-transitioning');
+      });
+      atlasTransitionTimer = 0;
+    }, 220);
+  } else {
+    applyMeta();
+    serviceAtlasPreview.classList.remove('is-transitioning');
+  }
+
+  if (syncRail) {
+    syncAtlasRail(key, 'snap');
+  }
 }
 
 function getServiceStopPositions() {
@@ -167,10 +287,10 @@ function getNearestServiceStopIndex(position) {
 }
 
 function applyServiceRailState(position, finalIndex, mode = 'continuous') {
-  if (!serviceNavSticky || !tickerSections.length) return;
+  if (!serviceNavSticky || !serviceAtlasOrder.length) return;
 
   const stopPositions = getServiceStopPositions();
-  const activeSectionId = tickerSections[finalIndex]?.id || tickerSections[0].id;
+  const activeSectionId = getAtlasKey(finalIndex);
   const activeAccent = tickerAccentMap[activeSectionId] || 'rgba(133, 185, 42, 0.8)';
   const clampedPosition = Math.max(0, Math.min(100, position));
 
@@ -187,35 +307,14 @@ function applyServiceRailState(position, finalIndex, mode = 'continuous') {
   setTickerActive(activeSectionId);
 }
 
-function getDominantSectionIndex() {
-  const viewportTop = 0;
-  const viewportBottom = window.innerHeight;
-  let bestIndex = 0;
-  let bestVisible = -1;
-
-  tickerSections.forEach((section, index) => {
-    const rect = section.getBoundingClientRect();
-    const visibleTop = Math.max(rect.top, viewportTop);
-    const visibleBottom = Math.min(rect.bottom, viewportBottom);
-    const visible = Math.max(0, visibleBottom - visibleTop);
-
-    if (visible > bestVisible) {
-      bestVisible = visible;
-      bestIndex = index;
-    }
-  });
-
-  return bestIndex;
-}
-
 function updateServiceRail(mode = 'continuous') {
-  if (!serviceNavSticky || !tickerSections.length) return;
+  if (!serviceNavSticky || !serviceAtlasOrder.length) return;
 
   const stopPositions = getServiceStopPositions();
   const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
   const scrollProgress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
   const continuousPosition = scrollProgress * 100;
-  const snappedIndex = getDominantSectionIndex();
+  const snappedIndex = Math.max(0, Math.min(serviceAtlasOrder.length - 1, Math.round(scrollProgress * (serviceAtlasOrder.length - 1))));
   const isAtTop = window.scrollY <= 2;
   const isAtBottom = window.scrollY >= maxScroll - 2;
   const finalIndex = isAtTop
@@ -232,6 +331,11 @@ function updateServiceRail(mode = 'continuous') {
       : mode === 'snap'
         ? stopPositions[finalIndex]
         : continuousPosition;
+  const targetKey = getAtlasKey(finalIndex);
+
+  if (targetKey && targetKey !== selectedAtlasKey) {
+    updateAtlasPreview(targetKey, { syncRail: false });
+  }
 
   applyServiceRailState(finalPosition, finalIndex, mode);
 }
@@ -269,13 +373,12 @@ function flashTickerSection(section) {
   }, 900);
 }
 
-function scrollToTickerSection(id) {
-  const section = document.getElementById(id);
-  if (!section) return;
+function scrollToTickerSection(key) {
+  if (!serviceAtlasPreview) return;
 
-  setTickerActive(id);
-  flashTickerSection(section);
-  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  updateAtlasPreview(key);
+  flashTickerSection(serviceAtlasSection || serviceAtlasPreview);
+  (serviceAtlasSection || serviceAtlasPreview).scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function syncTickerActive() {
@@ -283,42 +386,18 @@ function syncTickerActive() {
 }
 
 function setupTickerNavigation() {
-  if (!tickerLinks.length || !tickerSections.length) return;
+  if (!tickerLinks.length || !serviceAtlasOrder.length) return;
 
   applyTickerAccents();
 
   tickerLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
-      const targetId = link.getAttribute('href')?.slice(1);
-      if (!targetId) return;
-      scrollToTickerSection(targetId);
+      const targetKey = link.dataset.service || link.getAttribute('href')?.slice(1);
+      if (!targetKey) return;
+      scrollToTickerSection(targetKey);
     });
   });
-
-  if ('IntersectionObserver' in window) {
-    tickerObserver = new IntersectionObserver((entries) => {
-      const visibleEntries = entries.filter((entry) => entry.isIntersecting);
-      if (!visibleEntries.length) return;
-
-      const currentEntry = visibleEntries.sort((a, b) => {
-        if (b.intersectionRatio !== a.intersectionRatio) {
-          return b.intersectionRatio - a.intersectionRatio;
-        }
-        return Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top);
-      })[0];
-
-      if (currentEntry?.target?.id) {
-        setTickerActive(currentEntry.target.id);
-      }
-    }, {
-      root: null,
-      rootMargin: '-18% 0px -50% 0px',
-      threshold: [0.25, 0.45, 0.65]
-    });
-
-    tickerSections.forEach((section) => tickerObserver.observe(section));
-  }
 
   window.addEventListener('scroll', scheduleServiceRailUpdate, { passive: true });
   window.addEventListener('resize', scheduleServiceRailUpdate);
@@ -326,8 +405,54 @@ function setupTickerNavigation() {
   updateServiceRail('snap');
 }
 
+function setupServiceAtlas() {
+  if (!serviceAtlasPreviewBtn || !serviceAtlasPreview) return;
+
+  applyTickerAccents();
+  updateAtlasPreview(selectedAtlasKey, { animate: false });
+
+  serviceAtlasPreview.addEventListener('pointerenter', () => {
+    atlasWheelActive = true;
+  });
+
+  serviceAtlasPreview.addEventListener('pointerleave', () => {
+    atlasWheelActive = false;
+  });
+
+  serviceAtlasPreviewBtn.addEventListener('click', () => {
+    openDetail(selectedAtlasKey);
+  });
+
+  const handleWheel = (event) => {
+    if (!atlasWheelActive) return;
+    event.preventDefault();
+    event.stopPropagation();
+
+    const delta = event.deltaY;
+    if (Math.abs(delta) < 8) return;
+    if (atlasWheelLock) return;
+
+    const direction = delta > 0 ? 1 : -1;
+    const nextIndex = (selectedAtlasIndex + direction + serviceAtlasOrder.length) % serviceAtlasOrder.length;
+
+    atlasWheelLock = 1;
+    if (atlasWheelUnlockTimer) {
+      clearTimeout(atlasWheelUnlockTimer);
+    }
+
+    updateAtlasPreview(getAtlasKey(nextIndex));
+
+    atlasWheelUnlockTimer = window.setTimeout(() => {
+      atlasWheelLock = 0;
+    }, 140);
+  };
+
+  window.addEventListener('wheel', handleWheel, { passive: false, capture: true });
+  document.addEventListener('wheel', handleWheel, { passive: false, capture: true });
+}
+
 function setupServiceBusDrag() {
-  if (!serviceRouteBus || !serviceRouteTrack || !tickerSections.length) return;
+  if (!serviceRouteBus || !serviceRouteTrack || !serviceAtlasOrder.length) return;
   if (!window.matchMedia('(pointer: coarse)').matches && window.innerWidth > 760) return;
 
   const endDrag = () => {
@@ -335,7 +460,7 @@ function setupServiceBusDrag() {
 
     const { position } = routeDragState;
     const nextIndex = getNearestServiceStopIndex(position);
-    const targetId = tickerSections[nextIndex]?.id;
+    const targetId = getAtlasKey(nextIndex);
 
     routeDragState = null;
     document.body.classList.remove('service-route-dragging');
@@ -600,6 +725,7 @@ if (contactForm) {
 
 startHeroRotation();
 setupTickerNavigation();
+setupServiceAtlas();
 setupServiceBusDrag();
 syncHeaderOffset();
 

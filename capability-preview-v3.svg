@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1680" viewBox="0 0 1600 1680" fill="none">
+  <defs>
+    <style>
+      .ink { fill: #111111; font-family: "Noto Sans KR", "Space Grotesk", sans-serif; }
+      .muted { fill: #666666; font-family: "Noto Sans KR", sans-serif; }
+      .kicker { font-size: 16px; font-weight: 700; letter-spacing: 0.16em; }
+      .title { font-size: 62px; font-weight: 800; letter-spacing: -0.06em; }
+      .sub { font-size: 22px; line-height: 1.7; }
+      .section { font-size: 27px; font-weight: 800; letter-spacing: -0.04em; }
+      .card-title { font-size: 24px; font-weight: 800; letter-spacing: -0.04em; }
+      .card-copy { font-size: 16px; line-height: 1.65; }
+      .tag { font-size: 14px; font-weight: 700; letter-spacing: 0.06em; }
+      .btn { font-size: 15px; font-weight: 700; }
+      .tiny { font-size: 14px; }
+    </style>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2380f1"/>
+      <stop offset="25%" stop-color="#32b154"/>
+      <stop offset="50%" stop-color="#1b3479"/>
+      <stop offset="75%" stop-color="#efbb45"/>
+      <stop offset="100%" stop-color="#e7437b"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000000" flood-opacity="0.07"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1680" fill="#fcfcfa"/>
+
+  <rect x="0" y="0" width="1600" height="72" fill="#ffffff"/>
+  <rect x="0" y="71" width="1600" height="1" fill="#ececec"/>
+
+  <g transform="translate(78 30)">
+    <circle cx="0" cy="8" r="8" fill="#111111"/>
+    <circle cx="10" cy="8" r="8" fill="#2380f1"/>
+    <text class="ink" x="34" y="14" style="font-size:24px;font-weight:800;letter-spacing:-0.04em;">KCGsoft</text>
+  </g>
+
+  <g transform="translate(980 30)">
+    <text class="ink tiny" x="0" y="14" style="font-weight:700;">Core Services</text>
+    <text class="muted tiny" x="112" y="14" style="font-weight:700;">Capability</text>
+    <text class="muted tiny" x="202" y="14" style="font-weight:700;">Company</text>
+    <text class="muted tiny" x="284" y="14" style="font-weight:700;">Contact</text>
+  </g>
+
+  <g transform="translate(120 152)">
+    <text class="ink kicker" x="0" y="0">CAPABILITY / WHY KCGsoft</text>
+    <text class="ink title" x="0" y="78">버스회사 운영에 필요한</text>
+    <text class="ink title" x="0" y="150">솔루션을 하나의 흐름으로</text>
+    <text class="muted sub" x="0" y="218">
+      <tspan x="0" dy="0">차량관제서비스, 회사 내부 ERP 연동, 차량 연료 충전 데이터,</tspan>
+      <tspan x="0" dy="36">데이터 기반 노선설계까지. 고민하던 항목을 한 번에 이어줍니다.</tspan>
+    </text>
+
+    <rect x="0" y="286" width="110" height="4" fill="url(#bar)"/>
+  </g>
+
+  <g transform="translate(120 480)">
+    <text class="ink section" x="0" y="0">무엇을 해결하나요</text>
+    <text class="muted" x="0" y="34" style="font-size:17px;">현재 사이트의 톤을 유지하면서, 정보를 넓게 흘려 읽히게 구성한 예시입니다.</text>
+  </g>
+
+  <g transform="translate(120 548)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="1360" height="300" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <rect x="0" y="0" width="1360" height="5" fill="url(#bar)"/>
+
+      <g transform="translate(36 36)">
+        <text class="ink tag" x="0" y="0" fill="#2380f1">01</text>
+        <text class="ink card-title" x="0" y="46">차량관제와 탑승 흐름을 함께 본다</text>
+        <text class="muted card-copy" x="0" y="84">
+          <tspan x="0" dy="0">실시간 위치, 운행 상태, 탑승 데이터가 따로 보이지 않도록 하나의 운영 화면으로 묶습니다.</tspan>
+          <tspan x="0" dy="28">현장과 사무실이 같은 정보를 보게 만드는 것이 핵심입니다.</tspan>
+        </text>
+
+        <g transform="translate(0 136)">
+          <rect x="0" y="0" width="162" height="36" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+          <text class="ink btn" x="18" y="24">Wonder Shuttle</text>
+          <rect x="174" y="0" width="152" height="36" fill="#ffffff" stroke="#2380f1" stroke-width="1"/>
+          <text class="ink btn" x="194" y="24" fill="#2380f1">차량관제</text>
+        </g>
+      </g>
+
+      <g transform="translate(906 34)">
+        <rect x="0" y="0" width="388" height="232" fill="#fbfbf9" stroke="#e6e6e6"/>
+        <rect x="28" y="28" width="332" height="20" fill="#dff0ff"/>
+        <rect x="28" y="58" width="282" height="10" fill="#eef3f7"/>
+        <rect x="28" y="82" width="312" height="10" fill="#eef3f7"/>
+        <rect x="28" y="116" width="332" height="82" fill="#ffffff" stroke="#e5e5e5"/>
+        <rect x="48" y="132" width="90" height="48" fill="#32b154" opacity="0.12"/>
+        <rect x="158" y="132" width="90" height="48" fill="#1b3479" opacity="0.10"/>
+        <rect x="268" y="132" width="64" height="48" fill="#efbb45" opacity="0.14"/>
+        <circle cx="72" cy="202" r="6" fill="#32b154"/>
+        <circle cx="190" cy="202" r="6" fill="#1b3479"/>
+        <circle cx="302" cy="202" r="6" fill="#efbb45"/>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(120 874)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="660" height="250" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <rect x="0" y="0" width="660" height="5" fill="#32b154"/>
+      <g transform="translate(32 34)">
+        <text class="ink tag" x="0" y="0" fill="#32b154">02</text>
+        <text class="ink card-title" x="0" y="44">ERP와 운영 데이터를 자연스럽게 연결한다</text>
+        <text class="muted card-copy" x="0" y="80">
+          <tspan x="0" dy="0">배차, 정산, 이력, 업무 메모가 따로 쌓이지 않도록 내부 ERP와 이어줍니다.</tspan>
+          <tspan x="0" dy="28">관리자는 운영을 읽고, 실무자는 반복 작업을 줄일 수 있습니다.</tspan>
+        </text>
+      </g>
+      <g transform="translate(32 160)">
+        <rect x="0" y="0" width="126" height="34" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+        <text class="ink btn" x="18" y="23">Wonder FMS</text>
+        <rect x="138" y="0" width="126" height="34" fill="#ffffff" stroke="#32b154" stroke-width="1"/>
+        <text class="ink btn" x="156" y="23" fill="#32b154">ERP 연동</text>
+      </g>
+      <g transform="translate(434 34)">
+        <rect x="0" y="0" width="190" height="160" fill="#fbfbf9" stroke="#e6e6e6"/>
+        <rect x="20" y="20" width="150" height="20" fill="#eef7f0"/>
+        <rect x="20" y="54" width="150" height="20" fill="#eef7f0"/>
+        <rect x="20" y="88" width="150" height="20" fill="#eef7f0"/>
+        <rect x="20" y="122" width="88" height="20" fill="#eef7f0"/>
+        <rect x="116" y="122" width="54" height="20" fill="#eef7f0"/>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(806 874)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="674" height="250" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <rect x="0" y="0" width="674" height="5" fill="#1b3479"/>
+      <g transform="translate(32 34)">
+        <text class="ink tag" x="0" y="0" fill="#1b3479">03</text>
+        <text class="ink card-title" x="0" y="44">충전 데이터와 노선 설계를 한 번에 본다</text>
+        <text class="muted card-copy" x="0" y="80">
+          <tspan x="0" dy="0">차량 연료 충전 데이터, 노선 변경, 정류장 판단을 따로 다루지 않습니다.</tspan>
+          <tspan x="0" dy="28">데이터를 쌓고, 그 데이터로 노선을 설계하는 구조를 만듭니다.</tspan>
+        </text>
+      </g>
+      <g transform="translate(32 160)">
+        <rect x="0" y="0" width="126" height="34" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+        <text class="ink btn" x="18" y="23">Wonder Hydro</text>
+        <rect x="138" y="0" width="126" height="34" fill="#ffffff" stroke="#1b3479" stroke-width="1"/>
+        <text class="ink btn" x="156" y="23" fill="#1b3479">충전 데이터</text>
+        <rect x="274" y="0" width="138" height="34" fill="#ffffff" stroke="#efbb45" stroke-width="1"/>
+        <text class="ink btn" x="292" y="23" fill="#a57c06">노선 설계</text>
+      </g>
+      <g transform="translate(446 34)">
+        <rect x="0" y="0" width="196" height="160" fill="#fbfbf9" stroke="#e6e6e6"/>
+        <circle cx="42" cy="40" r="14" fill="#1b3479" opacity="0.18"/>
+        <circle cx="96" cy="72" r="14" fill="#efbb45" opacity="0.20"/>
+        <circle cx="146" cy="44" r="14" fill="#32b154" opacity="0.18"/>
+        <rect x="26" y="106" width="144" height="10" fill="#eef3f7"/>
+        <rect x="26" y="126" width="112" height="10" fill="#eef3f7"/>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(120 1170)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="1360" height="250" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+      <rect x="0" y="0" width="1360" height="5" fill="#efbb45"/>
+      <g transform="translate(32 34)">
+        <text class="ink tag" x="0" y="0" fill="#efbb45">04</text>
+        <text class="ink card-title" x="0" y="44">모든 버스회사 고민을 한 번에 묶는 구조</text>
+        <text class="muted card-copy" x="0" y="80">
+          <tspan x="0" dy="0">관제, ERP, 충전, 노선설계는 별개의 제품처럼 보이지만, 실제 현장에서는 서로 연결되어야 합니다.</tspan>
+          <tspan x="0" dy="28">KCGsoft는 이 흐름을 하나의 운영 언어로 정리합니다.</tspan>
+        </text>
+        <g transform="translate(0 132)">
+          <rect x="0" y="0" width="116" height="34" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+          <text class="ink btn" x="18" y="23">한방에 제공</text>
+          <rect x="128" y="0" width="154" height="34" fill="#ffffff" stroke="#111111" stroke-width="1"/>
+          <text class="ink btn" x="146" y="23">자세히 보기</text>
+        </g>
+      </g>
+      <g transform="translate(910 34)">
+        <rect x="0" y="0" width="384" height="160" fill="#fbfbf9" stroke="#e6e6e6"/>
+        <rect x="20" y="20" width="78" height="44" fill="#ffffff" stroke="#e6e6e6"/>
+        <rect x="110" y="20" width="78" height="44" fill="#ffffff" stroke="#e6e6e6"/>
+        <rect x="200" y="20" width="78" height="44" fill="#ffffff" stroke="#e6e6e6"/>
+        <rect x="290" y="20" width="74" height="44" fill="#ffffff" stroke="#e6e6e6"/>
+        <rect x="20" y="86" width="344" height="16" fill="#f1f4f6"/>
+        <rect x="20" y="112" width="264" height="16" fill="#f1f4f6"/>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(120 1472)">
+    <rect x="0" y="0" width="1360" height="1" fill="#e6e6e6"/>
+    <text class="muted tiny" x="0" y="38">화이트 기반의 현재 UI 흐름을 유지하면서, 버스 운영 솔루션을 여유 있게 읽히도록 만든 예시 시안</text>
+  </g>
+</svg>

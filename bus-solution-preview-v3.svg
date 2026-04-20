@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <style>
+      .ink { fill: #111111; font-family: "Noto Sans KR", "Space Grotesk", sans-serif; }
+      .muted { fill: #666666; font-family: "Noto Sans KR", sans-serif; }
+      .small { font-size: 16px; }
+      .body { font-size: 18px; line-height: 1.6; }
+      .label { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; }
+      .kicker { font-size: 19px; font-weight: 700; letter-spacing: 0.12em; }
+      .title { font-size: 58px; font-weight: 800; letter-spacing: -0.05em; }
+      .subtitle { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; }
+      .card-title { font-size: 22px; font-weight: 800; letter-spacing: -0.04em; }
+      .card-copy { font-size: 16px; line-height: 1.5; }
+      .button { font-size: 16px; font-weight: 700; }
+    </style>
+    <linearGradient id="accentBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2380f1"/>
+      <stop offset="30%" stop-color="#32b154"/>
+      <stop offset="60%" stop-color="#1b3479"/>
+      <stop offset="82%" stop-color="#efbb45"/>
+      <stop offset="100%" stop-color="#e7437b"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#fbfbf9"/>
+  <rect x="0" y="0" width="1600" height="64" fill="#ffffff"/>
+  <rect x="0" y="64" width="1600" height="1" fill="#ececec"/>
+
+  <g transform="translate(84 24)">
+    <circle cx="0" cy="8" r="8" fill="#111111"/>
+    <circle cx="10" cy="8" r="8" fill="#2380f1"/>
+    <text class="ink" x="34" y="14" style="font-size:26px;font-weight:800;letter-spacing:-0.04em;">KCGsoft</text>
+  </g>
+
+  <g transform="translate(520 24)">
+    <text class="ink small" x="0" y="14" style="font-weight:700;">솔루션</text>
+    <text class="ink small" x="84" y="14" style="font-weight:700; fill:#666;">버스관제</text>
+    <text class="ink small" x="170" y="14" style="font-weight:700; fill:#666;">ERP연동</text>
+    <text class="ink small" x="250" y="14" style="font-weight:700; fill:#666;">충전데이터</text>
+    <text class="ink small" x="362" y="14" style="font-weight:700; fill:#666;">노선설계</text>
+  </g>
+
+  <g transform="translate(800 126)">
+    <text class="ink kicker" text-anchor="middle" x="0" y="0">KCGsoft BUS OPERATIONS</text>
+    <text class="ink title" text-anchor="middle" x="0" y="78">버스회사 운영의</text>
+    <text class="ink title" text-anchor="middle" x="0" y="146">흩어진 문제를 한 번에</text>
+    <text class="muted body" text-anchor="middle" x="0" y="214">
+      차량관제서비스와 회사 내부 ERP연동, 차량 연료 충전 데이터,
+    </text>
+    <text class="muted body" text-anchor="middle" x="0" y="244">
+      데이터 기반의 노선설계까지. 고민하던 솔루션을 하나로 묶습니다.
+    </text>
+  </g>
+
+  <g transform="translate(270 344)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="1100" height="96" rx="0" fill="#ffffff" stroke="#ebebeb"/>
+      <g transform="translate(32 24)">
+        <rect x="0" y="0" width="150" height="48" fill="#ffffff" stroke="#e6e6e6"/>
+        <text class="ink label" x="18" y="21">차량관제</text>
+        <text class="muted small" x="18" y="41">실시간 위치 / 상태</text>
+
+        <rect x="170" y="0" width="150" height="48" fill="#ffffff" stroke="#e6e6e6"/>
+        <text class="ink label" x="188" y="21">ERP연동</text>
+        <text class="muted small" x="188" y="41">배차 / 정산 / 이력</text>
+
+        <rect x="340" y="0" width="170" height="48" fill="#ffffff" stroke="#e6e6e6"/>
+        <text class="ink label" x="358" y="21">충전 데이터</text>
+        <text class="muted small" x="358" y="41">연료 / 현장 기록</text>
+
+        <rect x="530" y="0" width="170" height="48" fill="#ffffff" stroke="#e6e6e6"/>
+        <text class="ink label" x="548" y="21">노선설계</text>
+        <text class="muted small" x="548" y="41">효율 / 정류장 / 증감차</text>
+
+        <rect x="720" y="0" width="150" height="48" fill="#ffffff" stroke="#e6e6e6"/>
+        <text class="ink label" x="738" y="21">운영완성</text>
+        <text class="muted small" x="738" y="41">데이터 기반 통합</text>
+
+        <path d="M150 24H164" stroke="#e1b0b6" stroke-width="2"/>
+        <path d="M320 24H334" stroke="#e1b0b6" stroke-width="2"/>
+        <path d="M510 24H524" stroke="#e1b0b6" stroke-width="2"/>
+        <path d="M700 24H714" stroke="#e1b0b6" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(440 498)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="720" height="220" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="720" height="6" fill="url(#accentBar)"/>
+      <g transform="translate(32 30)">
+        <circle cx="12" cy="12" r="12" fill="#2380f1"/>
+        <text class="ink" x="40" y="18" style="font-size:19px;font-weight:800;letter-spacing:-0.03em;">운영 데이터가 모이면, 솔루션은 따로 필요하지 않습니다.</text>
+
+        <text class="muted body" x="0" y="62">
+          <tspan x="0" dy="0">관제, ERP, 충전, 노선설계가 분리된 상태로는 버스회사 운영을 빠르게 정리하기 어렵습니다.</tspan>
+          <tspan x="0" dy="30">KCGsoft는 각 데이터를 한 흐름 안에 넣어, 현장과 관리가 동시에 읽히는 구조를 만듭니다.</tspan>
+        </text>
+
+        <g transform="translate(0 118)">
+          <rect x="0" y="0" width="132" height="36" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+          <text class="ink button" x="18" y="24">한방에 보기</text>
+
+          <rect x="146" y="0" width="154" height="36" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+          <text class="ink button" x="164" y="24">제품 소개 보기</text>
+
+          <text class="muted small" x="330" y="23">한 페이지에서 읽히는 버스 운영 솔루션</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(270 766)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="250" height="132" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="250" height="4" fill="#2380f1"/>
+      <text class="ink label" x="20" y="36" fill="#2380f1">Wonder Shuttle</text>
+      <text class="ink card-title" x="20" y="66">차량관제 서비스</text>
+      <text class="muted card-copy" x="20" y="96">실시간 위치와 탑승 데이터를</text>
+      <text class="muted card-copy" x="20" y="118">한 화면에서 봅니다.</text>
+    </g>
+  </g>
+
+  <g transform="translate(540 766)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="250" height="132" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="250" height="4" fill="#32b154"/>
+      <text class="ink label" x="20" y="36" fill="#32b154">Wonder Linx</text>
+      <text class="ink card-title" x="20" y="66">데이터 기반 노선설계</text>
+      <text class="muted card-copy" x="20" y="96">노선 증감차와 정류장 효율을</text>
+      <text class="muted card-copy" x="20" y="118">계산하는 설계 도구입니다.</text>
+    </g>
+  </g>
+
+  <g transform="translate(810 766)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="250" height="132" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="250" height="4" fill="#1b3479"/>
+      <text class="ink label" x="20" y="36" fill="#1b3479">Wonder Hydro</text>
+      <text class="ink card-title" x="20" y="66">충전 운영 데이터</text>
+      <text class="muted card-copy" x="20" y="96">차량 연료 충전 현황과</text>
+      <text class="muted card-copy" x="20" y="118">운영 이력을 연결합니다.</text>
+    </g>
+  </g>
+
+  <g transform="translate(1080 766)">
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="250" height="132" fill="#ffffff" stroke="#111111" stroke-width="1.1"/>
+      <rect x="0" y="0" width="250" height="4" fill="#efbb45"/>
+      <text class="ink label" x="20" y="36" fill="#a57c06">Wonder FMS</text>
+      <text class="ink card-title" x="20" y="66">내부 ERP 연동</text>
+      <text class="muted card-copy" x="20" y="96">배차, 정산, 이력을</text>
+      <text class="muted card-copy" x="20" y="118">ERP 흐름으로 묶습니다.</text>
+    </g>
+  </g>
+</svg>

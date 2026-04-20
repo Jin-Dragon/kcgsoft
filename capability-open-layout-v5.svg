@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1260" viewBox="0 0 1600 1260" fill="none">
+  <defs>
+    <style>
+      .ink { fill: #111111; font-family: "Noto Sans KR", "Space Grotesk", sans-serif; }
+      .muted { fill: #6a6a6a; font-family: "Noto Sans KR", sans-serif; }
+      .kicker { font-size: 16px; font-weight: 700; letter-spacing: 0.12em; }
+      .title { font-size: 58px; font-weight: 800; letter-spacing: -0.05em; }
+      .body { font-size: 21px; line-height: 1.65; }
+      .small { font-size: 15px; line-height: 1.55; }
+      .label { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; }
+      .mid { font-size: 45px; font-weight: 800; letter-spacing: -0.04em; }
+      .mid2 { font-size: 56px; font-weight: 800; letter-spacing: -0.05em; }
+      .btn { font-size: 16px; font-weight: 700; }
+    </style>
+    <linearGradient id="softBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fcfcfa"/>
+      <stop offset="100%" stop-color="#f8f7f3"/>
+    </linearGradient>
+    <linearGradient id="accentLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2380f1"/>
+      <stop offset="28%" stop-color="#32b154"/>
+      <stop offset="56%" stop-color="#1b3479"/>
+      <stop offset="80%" stop-color="#efbb45"/>
+      <stop offset="100%" stop-color="#e7437b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1260" fill="url(#softBg)"/>
+
+  <rect x="0" y="0" width="1600" height="68" fill="#ffffff"/>
+  <rect x="0" y="67" width="1600" height="1" fill="#ececec"/>
+  <g transform="translate(76 27)">
+    <circle cx="0" cy="8" r="8" fill="#111111"/>
+    <circle cx="10" cy="8" r="8" fill="#2380f1"/>
+    <text class="ink" x="34" y="14" style="font-size:24px;font-weight:800;letter-spacing:-0.04em;">KCGsoft</text>
+  </g>
+  <g transform="translate(980 27)">
+    <text class="muted small" x="0" y="14" style="font-weight:700;">Core Services</text>
+    <text class="muted small" x="126" y="14" style="font-weight:700;">Capability</text>
+    <text class="muted small" x="222" y="14" style="font-weight:700;">Company</text>
+    <text class="muted small" x="304" y="14" style="font-weight:700;">Contact</text>
+  </g>
+
+  <g transform="translate(800 146)">
+    <text class="ink kicker" text-anchor="middle" x="0" y="0">CAPABILITY / WHY KCGsoft</text>
+    <text class="ink title" text-anchor="middle" x="0" y="80">버스회사 운영 데이터,</text>
+    <text class="ink title" text-anchor="middle" x="0" y="150">어떻게 한 번에 연결할까?</text>
+    <text class="muted body" text-anchor="middle" x="0" y="214">
+      <tspan x="0" dy="0">차량관제서비스, 내부 ERP연동, 연료 충전 데이터, 데이터 기반 노선설계까지</tspan>
+      <tspan x="0" dy="34">각각이 아니라 같은 운영 흐름으로 묶어 제공합니다.</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(0 316)">
+    <rect x="188" y="0" width="1224" height="1" fill="#ececec"/>
+    <rect x="188" y="316" width="1224" height="1" fill="#ececec"/>
+  </g>
+
+  <g transform="translate(220 356)">
+    <rect x="0" y="0" width="206" height="74" fill="#ffffff" stroke="#ececec"/>
+    <text class="ink label" x="20" y="28" fill="#2380f1">차량관제서비스</text>
+    <text class="muted small" x="20" y="54">실시간 위치 / 상태 / 탑승</text>
+
+    <text x="438" y="43" class="ink" style="font-size:24px;font-weight:700;fill:#d58a92;">+</text>
+
+    <rect x="470" y="0" width="206" height="74" fill="#ffffff" stroke="#ececec"/>
+    <text class="ink label" x="490" y="28" fill="#32b154">내부 ERP 연동</text>
+    <text class="muted small" x="490" y="54">배차 / 정산 / 이력</text>
+
+    <text x="908" y="43" class="ink" style="font-size:24px;font-weight:700;fill:#d58a92;">+</text>
+
+    <rect x="940" y="0" width="206" height="74" fill="#ffffff" stroke="#ececec"/>
+    <text class="ink label" x="960" y="28" fill="#1b3479">연료 충전 데이터</text>
+    <text class="muted small" x="960" y="54">충전 현황 / 운영 기록</text>
+  </g>
+
+  <g transform="translate(800 512)">
+    <circle cx="0" cy="0" r="118" fill="#fff5f5"/>
+    <rect x="-1" y="-132" width="2" height="80" fill="#ececec"/>
+    <text class="ink" text-anchor="middle" x="-42" y="-14" style="font-size:34px;">📊</text>
+    <text class="ink" text-anchor="middle" x="0" y="-14" style="font-size:34px;">🚌</text>
+    <text class="ink" text-anchor="middle" x="42" y="-14" style="font-size:34px;">🧭</text>
+    <text class="muted" text-anchor="middle" x="0" y="32" style="font-size:18px;">흩어진 데이터가 아니라</text>
+    <text class="ink mid" text-anchor="middle" x="0" y="86">운영 언어의 통합</text>
+    <text class="ink mid2" text-anchor="middle" x="0" y="152" style="fill:#e7437b;">한 방에 제공되는 솔루션</text>
+  </g>
+
+  <g transform="translate(188 760)">
+    <rect x="0" y="0" width="1224" height="1" fill="#ececec"/>
+    <g transform="translate(0 36)">
+      <g transform="translate(0 0)">
+        <text class="muted label" x="0" y="0">INSIGHT A</text>
+        <text class="ink" x="0" y="44" style="font-size:32px;font-weight:800;letter-spacing:-0.04em;">차량 관제와 ERP를 같이 보면</text>
+        <text class="ink" x="0" y="84" style="font-size:32px;font-weight:800;letter-spacing:-0.04em;">운영 병목이 바로 보입니다</text>
+        <text class="muted small" x="0" y="124">
+          <tspan x="0" dy="0">실시간 운행 흐름과 내부 정산 흐름이 연결되면, 현장과 사무실의 판단 속도가 맞춰집니다.</tspan>
+        </text>
+      </g>
+
+      <g transform="translate(412 0)">
+        <text class="muted label" x="0" y="0">INSIGHT B</text>
+        <text class="ink" x="0" y="44" style="font-size:32px;font-weight:800;letter-spacing:-0.04em;">충전 데이터와 노선 설계를</text>
+        <text class="ink" x="0" y="84" style="font-size:32px;font-weight:800;letter-spacing:-0.04em;">분리하지 않아야 효율이 납니다</text>
+        <text class="muted small" x="0" y="124">
+          <tspan x="0" dy="0">연료/충전 데이터는 노선 증감차와 정류장 설계의 핵심 입력값이 됩니다.</tspan>
+        </text>
+      </g>
+
+      <g transform="translate(828 0)">
+        <text class="muted label" x="0" y="0">INSIGHT C</text>
+        <text class="ink" x="0" y="44" style="font-size:32px;font-weight:800;letter-spacing:-0.04em;">버스회사가 고민하는 기능을</text>
+        <text class="ink" x="0" y="84" style="font-size:32px;font-weight:800;letter-spacing:-0.04em;">제품군 하나로 제공합니다</text>
+        <text class="muted small" x="0" y="124">
+          <tspan x="0" dy="0">Shuttle, Linx, Hydro, FMS가 같은 체계 안에서 동작하도록 설계했습니다.</tspan>
+        </text>
+      </g>
+    </g>
+    <rect x="0" y="236" width="1224" height="1" fill="#ececec"/>
+  </g>
+
+  <g transform="translate(610 1066)">
+    <rect x="0" y="0" width="380" height="54" rx="0" fill="#ffffff" stroke="#111111"/>
+    <rect x="0" y="0" width="380" height="4" fill="url(#accentLine)"/>
+    <text class="ink btn" x="100" y="35">KCGsoft 통합 솔루션 소개 보기</text>
+  </g>
+</svg>
