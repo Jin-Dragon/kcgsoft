@@ -23,7 +23,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Space Grotesk", "Noto Sans KR", sans-serif;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
 }
 
 a {
@@ -108,6 +108,15 @@ img {
 .capability-row span,
 .fact-row span {
   color: var(--detail-accent, #111111);
+}
+
+.hero-message h1,
+.section-summary,
+.capability-open-summary,
+.capability-open-insights h3,
+.capability-open-insights p {
+  word-break: keep-all;
+  line-break: strict;
 }
 
 .brand-copy span {
@@ -501,7 +510,7 @@ strong {
 .services-flow-index {
   display: block;
   margin-bottom: 10px;
-  font: 700 12px 'Space Grotesk', Arial, sans-serif;
+  font: 700 12px 'Noto Sans KR', sans-serif;
   letter-spacing: 0.12em;
   color: var(--flow-accent, #85b92a);
 }
@@ -668,7 +677,7 @@ h2 {
 
 .capability-open-focus h3 {
   margin: 10px 0 0;
-  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-size: clamp(2.3rem, 4.6vw, 3.9rem);
   line-height: 0.98;
   letter-spacing: -0.05em;
   color: #e7437b;
@@ -693,7 +702,7 @@ h2 {
 
 .capability-open-insights span {
   color: var(--muted);
-  font: 700 0.8rem 'Space Grotesk', sans-serif;
+  font: 700 0.8rem 'Noto Sans KR', sans-serif;
   letter-spacing: 0.1em;
 }
 
@@ -1095,7 +1104,7 @@ body.contact-lock {
 
   .capability-open-focus h3 {
     margin-top: 8px;
-    font-size: clamp(1.42rem, 6vw, 2rem);
+    font-size: clamp(1.63rem, 6.9vw, 2.3rem);
     line-height: 1.08;
   }
 
@@ -1564,7 +1573,7 @@ body.contact-lock {
 
 .service-atlas-preview-tag {
   margin: 0;
-  font: 700 12px 'Space Grotesk', sans-serif;
+  font: 700 12px 'Noto Sans KR', sans-serif;
   letter-spacing: 0.14em;
   color: var(--preview-accent, var(--accent-strong));
 }
@@ -1711,10 +1720,9 @@ body.contact-lock {
 }
 
 .client-marquee-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 18px;
+  display: grid;
+  gap: 8px;
+  justify-items: start;
   margin-bottom: 16px;
 }
 
@@ -1724,6 +1732,27 @@ body.contact-lock {
   line-height: 1.1;
   letter-spacing: -0.04em;
   text-transform: none;
+}
+
+.client-marquee-copy {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.client-marquee-copy h3 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.client-marquee-copy p {
+  margin: 0;
+  font-size: clamp(0.92rem, 1.3vw, 1.02rem);
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .client-marquee-viewport {

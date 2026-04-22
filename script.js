@@ -71,6 +71,7 @@ const serviceAtlasPreviewTitle = document.querySelector('.service-atlas-preview-
 const serviceAtlasPreviewText = document.querySelector('.service-atlas-preview-text');
 const serviceAtlasPreviewBtn = document.querySelector('[data-atlas-detail-open]');
 const serviceAtlasPills = document.querySelector('.service-atlas-pills');
+const capabilityOpenCtaBtn = document.querySelector('.capability-open-cta button');
 
 const serviceAtlasOrder = ['wonder-shuttle', 'wonder-linx', 'wonder-hydro', 'wonder-fms', 'catchloc'];
 
@@ -405,6 +406,14 @@ function setupTickerNavigation() {
   updateServiceRail('snap');
 }
 
+function setupCapabilityOpenCta() {
+  if (!capabilityOpenCtaBtn) return;
+
+  capabilityOpenCtaBtn.addEventListener('click', () => {
+    scrollToTickerSection(selectedAtlasKey || serviceAtlasOrder[0]);
+  });
+}
+
 function setupServiceAtlas() {
   if (!serviceAtlasPreviewBtn || !serviceAtlasPreview) return;
 
@@ -725,6 +734,7 @@ if (contactForm) {
 
 startHeroRotation();
 setupTickerNavigation();
+setupCapabilityOpenCta();
 setupServiceAtlas();
 setupServiceBusDrag();
 syncHeaderOffset();
