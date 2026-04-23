@@ -21,9 +21,10 @@
     title: 'WONDER HYDRO',
     accent: '#1b3479',
     pages: [
-      { nav: '기본', eyebrow: '기본', title: '수소 충전 운영을 한 화면에서 관리합니다.', text: '충전 상태와 진행 흐름을 명확하게 확인할 수 있도록 구성했습니다.', list: ['충전 관제', '상태 확인', '이력 추적'] },
-      { nav: '현장', eyebrow: '현장', title: '현장 운영 흐름을 연결합니다.', text: '분산된 단계와 데이터를 묶어 충전소 운영의 일관성을 높입니다.', list: ['업무 흐름 정렬', '현장 모니터링', '통합 제어'] },
-      { nav: '기록', eyebrow: '기록', title: '운영 이력을 지속적으로 관리합니다.', text: '충전 기록과 상태 로그를 보관해 사후 점검과 관리에 활용합니다.', list: ['이력 관리', '운영 로그', '상태 점검'] }
+      { nav: '01', eyebrow: '01', title: '수소버스 등록', text: '수소버스를 등록하고 운행 지역을 입력해 노선 기준 데이터를 먼저 구성합니다.', list: ['수소버스 등록', '운행 지역 입력', '노선 기준 설정'], icon: 'hyd-1' },
+      { nav: '02', eyebrow: '02', title: '충전소 매칭', text: '입력된 노선을 기준으로 접근 가능한 충전소 중 가장 가까운 수소충전소 위치를 자동 파악합니다.', list: ['근접 충전소 탐색', '노선-충전소 매칭', '위치 가시화'], icon: 'hyd-2' },
+      { nav: '03', eyebrow: '03', title: '충전 실적 집계', text: '각 충전소에서 얼마나 충전했는지, 몇 회 충전했는지, 연비가 얼마나 나오는지 운영 수치를 누적합니다.', list: ['충전량 집계', '충전 횟수 집계', '연비 산출'], icon: 'hyd-3' },
+      { nav: '04', eyebrow: '04', title: '통합 대시보드', text: '총 충전량과 핵심 수치를 대시보드에서 한눈에 확인해 운영 상태를 즉시 판단합니다.', list: ['총 충전량', '핵심 지표 대시보드', '운영 현황 한눈에 확인'], icon: 'hyd-4' }
     ]
   },
   'wonder-fms': {
@@ -65,6 +66,8 @@ const serviceRouteTrack = document.querySelector('.service-route-track');
 const serviceRouteBus = document.querySelector('.service-route-bus');
 const serviceRouteStops = Array.from(document.querySelectorAll('.service-route-stop'));
 const serviceAtlasSection = document.querySelector('.services-section');
+const serviceIntroShell = document.querySelector('.service-intro-shell');
+const serviceIntroRailDots = Array.from(document.querySelectorAll('.section-head-rail-dot'));
 const serviceAtlasContainer = document.querySelector('.service-atlas');
 const serviceAtlasPreview = document.querySelector('[data-service-preview]');
 const serviceAtlasPreviewTag = document.querySelector('.service-atlas-preview-tag');
@@ -138,8 +141,8 @@ const serviceAtlasMeta = {
   'wonder-fms': {
     tag: '전세버스 ERP 통합 관리',
     title: 'WONDER FMS',
-    text: '운영, 배차, 정산을 하나로 묶어 전세버스 업무를 정리하는 ERP 서비스입니다.',
-    pills: ['ERP 통합', '배차 관리', '정산 흐름']
+    text: '운행기록, 정비/경비/연료비 지출, 노선 손익을 데이터로 통합해 매출·지출 지표를 한눈에 관리하는 버스 전용 FMS입니다.',
+    pills: ['지출 통합 관리', '노선 손익 분석', '커스텀 대시보드']
   },
   catchloc: {
     tag: 'GPS 위치 추적 솔루션',
@@ -158,24 +161,29 @@ const defaultAtlasVisualMarkup = `
 `;
 
 const wonderFmsVisualMarkup = `
-  <div class="fms-visual-top-line" aria-hidden="true"></div>
   <div class="fms-visual-cards">
     <article class="fms-visual-card">
-      <span class="fms-card-icon is-collect" aria-hidden="true"></span>
-      <h4>01. 데이터 수집</h4>
-      <p>전세버스 운영에 필요한 데이터를<br />수집하고 정리합니다.</p>
+      <span class="fms-card-icon is-ops" aria-hidden="true"></span>
+      <h4>01. 차량 기록 관리</h4>
+      <p>회사 등록 버스의 운행 기록과<br />정비 이력을 통합 관리</p>
     </article>
     <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
     <article class="fms-visual-card">
-      <span class="fms-card-icon is-manage" aria-hidden="true"></span>
-      <h4>02. 분석 및 관리</h4>
-      <p>수집된 데이터를 분석하여 효율적인<br />운영과 관리를 지원합니다.</p>
+      <span class="fms-card-icon is-cost" aria-hidden="true"></span>
+      <h4>02. 지출 데이터 통합</h4>
+      <p>경비비·연료비 지출을 통합해<br />비용 흐름을 한눈에 확인</p>
     </article>
     <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
     <article class="fms-visual-card">
-      <span class="fms-card-icon is-report" aria-hidden="true"></span>
-      <h4>03. 보고서 및 활용</h4>
-      <p>분석 결과를 보고서로 제공하여<br />의사결정에 활용할 수 있습니다.</p>
+      <span class="fms-card-icon is-profit" aria-hidden="true"></span>
+      <h4>03. 노선 손익 분석</h4>
+      <p>노선별 매출·지출을 비교해<br />손익 지표를 산출</p>
+    </article>
+    <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+    <article class="fms-visual-card">
+      <span class="fms-card-icon is-dashboard" aria-hidden="true"></span>
+      <h4>04. 커스텀 대시보드</h4>
+      <p>조직·거래처 데이터를 통합해<br />매출·지출 현황을 한눈에 확인</p>
     </article>
   </div>
 `;
@@ -236,6 +244,62 @@ const wonderLinxVisualMarkup = `
   </div>
 `;
 
+const wonderHydroVisualMarkup = `
+  <div class="hydro-visual-cards">
+    <article class="hydro-visual-card">
+      <span class="hydro-card-icon is-register" aria-hidden="true"></span>
+      <h4>01. 수소버스 정보 입력</h4>
+      <p>수소버스를 노선 정보와 함께 등록하여 이력관리</p>
+    </article>
+    <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+    <article class="hydro-visual-card">
+      <span class="hydro-card-icon is-station" aria-hidden="true"></span>
+      <h4>02. 충전소 정보 확인</h4>
+      <p>노선 기준으로 가장 가까운 수소충전소 위치를 확인하여 배정</p>
+    </article>
+    <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+    <article class="hydro-visual-card">
+      <span class="hydro-card-icon is-usage" aria-hidden="true"></span>
+      <h4>03. 충전 실적 집계</h4>
+      <p>충전량·충전횟수·연비를 집계해<br />운행 효율 수치를 계산</p>
+    </article>
+    <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+    <article class="hydro-visual-card">
+      <span class="hydro-card-icon is-dashboard" aria-hidden="true"></span>
+      <h4>04. 통합 대시보드</h4>
+      <p>총 충전량과 핵심 지표를<br />대시보드에서 한눈에 확인</p>
+    </article>
+  </div>
+`;
+
+const catchlocVisualMarkup = `
+  <div class="catchloc-visual-cards">
+    <article class="catchloc-visual-card">
+      <span class="catchloc-card-icon is-gps" aria-hidden="true"></span>
+      <h4>01. GPS 위치 수집</h4>
+      <p>차량 GPS 위치를 실시간 수집해<br />운행 흐름을 추적</p>
+    </article>
+    <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+    <article class="catchloc-visual-card">
+      <span class="catchloc-card-icon is-boarding" aria-hidden="true"></span>
+      <h4>02. 탑승 데이터 수집</h4>
+      <p>탑승객 승하차 데이터를 수집해<br />운행·수요 데이터를 통합</p>
+    </article>
+    <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+    <article class="catchloc-visual-card">
+      <span class="catchloc-card-icon is-admin" aria-hidden="true"></span>
+      <h4>03. 기업 커스터마이징</h4>
+      <p>기업 운영 방식에 맞게 커스텀 가능</p>
+    </article>
+    <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+    <article class="catchloc-visual-card">
+      <span class="catchloc-card-icon is-analytics" aria-hidden="true"></span>
+      <h4>04. 로우데이터 추출</h4>
+      <p>데이터를 엑셀로 저장·추출 후 가공해 핵심 지표를 분석</p>
+    </article>
+  </div>
+`;
+
 function updateAtlasVisual(key) {
   if (!serviceAtlasVisual) return;
 
@@ -243,6 +307,8 @@ function updateAtlasVisual(key) {
     serviceAtlasVisual.classList.add('is-shuttle');
     serviceAtlasVisual.classList.remove('is-fms');
     serviceAtlasVisual.classList.remove('is-linx');
+    serviceAtlasVisual.classList.remove('is-hydro');
+    serviceAtlasVisual.classList.remove('is-catchloc');
     serviceAtlasVisual.innerHTML = wonderShuttleVisualMarkup;
     return;
   }
@@ -251,7 +317,19 @@ function updateAtlasVisual(key) {
     serviceAtlasVisual.classList.add('is-linx');
     serviceAtlasVisual.classList.remove('is-shuttle');
     serviceAtlasVisual.classList.remove('is-fms');
+    serviceAtlasVisual.classList.remove('is-hydro');
+    serviceAtlasVisual.classList.remove('is-catchloc');
     serviceAtlasVisual.innerHTML = wonderLinxVisualMarkup;
+    return;
+  }
+
+  if (key === 'wonder-hydro') {
+    serviceAtlasVisual.classList.add('is-hydro');
+    serviceAtlasVisual.classList.remove('is-shuttle');
+    serviceAtlasVisual.classList.remove('is-linx');
+    serviceAtlasVisual.classList.remove('is-fms');
+    serviceAtlasVisual.classList.remove('is-catchloc');
+    serviceAtlasVisual.innerHTML = wonderHydroVisualMarkup;
     return;
   }
 
@@ -259,10 +337,24 @@ function updateAtlasVisual(key) {
     serviceAtlasVisual.classList.add('is-fms');
     serviceAtlasVisual.classList.remove('is-shuttle');
     serviceAtlasVisual.classList.remove('is-linx');
+    serviceAtlasVisual.classList.remove('is-hydro');
+    serviceAtlasVisual.classList.remove('is-catchloc');
     serviceAtlasVisual.innerHTML = wonderFmsVisualMarkup;
     return;
   }
 
+  if (key === 'catchloc') {
+    serviceAtlasVisual.classList.add('is-catchloc');
+    serviceAtlasVisual.classList.remove('is-shuttle');
+    serviceAtlasVisual.classList.remove('is-linx');
+    serviceAtlasVisual.classList.remove('is-hydro');
+    serviceAtlasVisual.classList.remove('is-fms');
+    serviceAtlasVisual.innerHTML = catchlocVisualMarkup;
+    return;
+  }
+
+  serviceAtlasVisual.classList.remove('is-hydro');
+  serviceAtlasVisual.classList.remove('is-catchloc');
   serviceAtlasVisual.classList.remove('is-linx');
   serviceAtlasVisual.classList.remove('is-shuttle');
   serviceAtlasVisual.classList.remove('is-fms');
@@ -355,7 +447,23 @@ function updateAtlasPreview(key, options = {}) {
 
   selectedAtlasKey = key;
   selectedAtlasIndex = getAtlasIndex(key);
-  serviceAtlasPreview.style.setProperty('--preview-accent', tickerAccentMap[key] || '#2380f1');
+  const nextAccent = tickerAccentMap[key] || '#2380f1';
+  serviceAtlasPreview.style.setProperty('--preview-accent', nextAccent);
+  const sectionThemeTint = mixHexWithWhite(nextAccent, 0.92);
+  const sectionThemeLine = mixHexWithWhite(nextAccent, 0.78);
+  if (serviceAtlasSection) {
+    serviceAtlasSection.style.setProperty('--section-theme-bg', sectionThemeTint);
+    serviceAtlasSection.style.setProperty('--section-theme-line', sectionThemeLine);
+  }
+  if (serviceIntroShell) {
+    serviceIntroShell.style.setProperty('--section-theme-bg', sectionThemeTint);
+    serviceIntroShell.style.setProperty('--section-theme-line', sectionThemeLine);
+  }
+  if (serviceIntroRailDots.length) {
+    serviceIntroRailDots.forEach((dot, dotIndex) => {
+      dot.classList.toggle('is-active', dotIndex === selectedAtlasIndex);
+    });
+  }
   setTickerActive(key);
 
   const applyMeta = () => {
@@ -452,6 +560,7 @@ function renderAtlasDetailView(key) {
   serviceAtlasDetailTrack.innerHTML = data.pages.map((page, index) => `
     <section class="detail-page" style="--detail-accent:${data.accent}" data-atlas-page-index="${index}">
       <div class="detail-page-copy">
+        ${page.icon ? `<span class="atlas-detail-page-icon atlas-detail-page-icon--${escapeHtml(page.icon)}" aria-hidden="true"></span>` : ''}
         <p>${escapeHtml(page.text)}</p>
         <ul>${page.list.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
       </div>
