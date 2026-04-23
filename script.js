@@ -1,4 +1,4 @@
-﻿const serviceData = {
+﻿let serviceData = {
   'wonder-shuttle': {
     title: 'WONDER SHUTTLE',
     accent: '#32b154',
@@ -80,6 +80,7 @@ const serviceAtlasDetailView = document.querySelector('[data-atlas-detail-view]'
 const serviceAtlasDetailNav = document.querySelector('[data-atlas-detail-nav]');
 const serviceAtlasDetailTrack = document.querySelector('[data-atlas-detail-track]');
 const capabilityOpenCtaBtn = document.querySelector('.capability-open-cta button');
+const langButtons = Array.from(document.querySelectorAll('.lang-btn'));
 
 const serviceAtlasOrder = ['wonder-shuttle', 'wonder-linx', 'wonder-hydro', 'wonder-fms', 'catchloc'];
 
@@ -112,6 +113,7 @@ const contactApiUrl = window.location.protocol === 'file:'
 const heroSlides = document.querySelectorAll('[data-hero-slide]');
 let heroSlideIndex = 0;
 let heroSlideTimer = 0;
+let currentLang = 'ko';
 const tickerAccentMap = {
   'wonder-shuttle': serviceData['wonder-shuttle'].accent,
   'wonder-linx': serviceData['wonder-linx'].accent,
@@ -119,7 +121,7 @@ const tickerAccentMap = {
   'wonder-fms': serviceData['wonder-fms'].accent,
   catchloc: serviceData.catchloc.accent
 };
-const serviceAtlasMeta = {
+let serviceAtlasMeta = {
   'wonder-linx': {
     tag: '데이터 기반 지능형 노선 설계',
     title: 'WONDER LINX',
@@ -160,7 +162,7 @@ const defaultAtlasVisualMarkup = `
   <span class="service-atlas-visual-panel"></span>
 `;
 
-const wonderFmsVisualMarkup = `
+let wonderFmsVisualMarkup = `
   <div class="fms-visual-cards">
     <article class="fms-visual-card">
       <span class="fms-card-icon is-ops" aria-hidden="true"></span>
@@ -188,7 +190,7 @@ const wonderFmsVisualMarkup = `
   </div>
 `;
 
-const wonderShuttleVisualMarkup = `
+let wonderShuttleVisualMarkup = `
   <div class="shuttle-visual-cards">
     <article class="shuttle-visual-card">
       <span class="shuttle-card-icon is-app" aria-hidden="true"></span>
@@ -216,7 +218,7 @@ const wonderShuttleVisualMarkup = `
   </div>
 `;
 
-const wonderLinxVisualMarkup = `
+let wonderLinxVisualMarkup = `
   <div class="linx-visual-cards">
     <article class="linx-visual-card">
       <span class="linx-card-icon is-route" aria-hidden="true"></span>
@@ -244,7 +246,7 @@ const wonderLinxVisualMarkup = `
   </div>
 `;
 
-const wonderHydroVisualMarkup = `
+let wonderHydroVisualMarkup = `
   <div class="hydro-visual-cards">
     <article class="hydro-visual-card">
       <span class="hydro-card-icon is-register" aria-hidden="true"></span>
@@ -272,7 +274,7 @@ const wonderHydroVisualMarkup = `
   </div>
 `;
 
-const catchlocVisualMarkup = `
+let catchlocVisualMarkup = `
   <div class="catchloc-visual-cards">
     <article class="catchloc-visual-card">
       <span class="catchloc-card-icon is-gps" aria-hidden="true"></span>
@@ -299,6 +301,833 @@ const catchlocVisualMarkup = `
     </article>
   </div>
 `;
+
+const LANG_STORAGE_KEY = 'kcg_lang';
+const LANG_HTML_CODE = { ko: 'ko', en: 'en', ja: 'ja', zh: 'zh-CN' };
+const I18N_UI = {
+  ko: {
+    nav: ['Core Services', 'Capability', 'Company', 'Contact'],
+    heroKicker: 'KCGsoft / Seoul / Urban Mobility Systems',
+    heroTitle: '<span class="hero-brand">KCG soft는</span> <span class="hero-rest">도시 이동의 새로운 기준을</span><br /><span class="hero-rest">만들어갑니다.</span>',
+    heroFocus: 'Current Focus',
+    heroFocusText: '운영 가능한 서비스 구조, 현장 프로세스, 위치 데이터, 접근 권한 제어를 하나의 시스템으로 연결합니다.',
+    heroCta: '문의하기',
+    capabilityTitle: '버스회사 운영 데이터<br />어떻게 한 번에 연결할까?',
+    capabilitySummary: '차량관제서비스, 회사 내부 ERP 연동, 차량 연료 충전 데이터, 데이터 기반 노선설계까지.<br />같은 운영 흐름으로 연결해 제공합니다.',
+    capabilitySteps: [
+      ['데이터 기반 노선설계', '증감차 / 정류장 / 효율화 판단'],
+      ['차량관제서비스', '실시간 위치 / 운행 상태 / 탑승 흐름'],
+      ['내부 ERP 연동', '배차 / 정산 / 이력 / 운영기록'],
+      ['연료 충전 데이터', '충전 현황 / 현장 이력 / 운영 데이터']
+    ],
+    focusNote: '흩어진 데이터가 아니라, 운영 흐름의 통합',
+    focusTitle: '버스회사가 고민하는 솔루션을 한 번에 제공합니다.',
+    insights: [
+      ['Insight A', '운행 현황 데이터를 한눈에 파악합니다.', '따로 확인하던 데이터를 하나로 모아 현장 판단 속도를 높입니다.'],
+      ['Insight B', '매일 쌓이는 데이터가 운영 기준이 됩니다.', '감각이 아닌 실제 지표로 노선·배차·비용을 결정합니다.'],
+      ['Insight C', '노선 하나 바꿀 때도 데이터가 근거가 됩니다.', '증감차·정류장·수요 데이터를 기반으로 변경 결정을 빠르게 내립니다.']
+    ],
+    capabilityCta: 'KCGsoft 통합 솔루션 소개 보기',
+    ticker: ['Wonder Shuttle', 'Wonder Linx', 'Wonder Hydro', 'Wonder FMS', 'Catchloc'],
+    serviceHeadKicker: 'Index / Core Services',
+    serviceHeadTitle: 'KCGsoft 핵심 서비스 라인업',
+    serviceHeadSummary: 'Wonder Shuttle부터 Catchloc까지, 쌓아온 노하우를 하나로 담았습니다.',
+    serviceDetailOpen: '자세히 보기',
+    serviceDetailClose: '닫기',
+    clientsKicker: 'Clients / Powered by Catchloc',
+    clientsTitle: 'Partner Client',
+    clientsDesc: '수많은 기업의 운영 현장에서 KCG soft가 함께하고 있습니다.',
+    trustKicker: 'KCGsoft Service Overview',
+    trustTitle: '운영 중심 모빌리티 서비스',
+    trustCards: [
+      ['01. 실시간 관제', '통합 관제 플랫폼으로 차량과 노선을 실시간 모니터링합니다.'],
+      ['02. 노선 설계', '데이터 기반으로 최적의 노선을 설계하고 운행 효율을 높입니다.'],
+      ['03. 수소 충전 운영', '수소 충전소 연계 및 운영 관리를 통해 안정적인 충전 운영을 지원합니다.'],
+      ['04. 전세버스 ERP', '예약부터 정산까지 전세버스 운영의 전 과정을 통합 관리합니다.'],
+      ['05. GPS 위치 추적', '정밀한 GPS 추적으로 차량 위치와 운행 이력을 안전하게 관리합니다.'],
+      ['06. 데이터 리포트', '운영 현황을 시각화한 리포트로 의사결정을 빠르고 정확하게 지원합니다.'],
+      ['07. 커스터마이징', '고객의 비즈니스 환경에 맞춘 기능과 프로세스를 유연하게 제공합니다.'],
+      ['08. 운영 지원', '전문 컨설팅과 지속적 기술 지원으로 성공적인 운영을 함께합니다.']
+    ],
+    trustCta: '도입 문의하기',
+    footer: [
+      '주식회사 케이씨지소프트 | 대표자명: 전수연',
+      '주소: 서울특별시 성동구 성수일로 89, 903호(성수동1가, Metamorpho(지식산업센터))',
+      '사업자등록번호: 611-86-03271 | 통신판매업신고번호: 제2024-서울성동-1589호 | 직업정보제공사업신고번호 J1202020250001',
+      'Copyright ⓒ 2026 KCGsoft All rights reserved.'
+    ],
+    contact: {
+      kicker: 'Contact',
+      title: '문의하기',
+      close: 'Close',
+      labels: ['이름', '회사명', '연락처', '이메일', '제목', '문의 내용', 'Website'],
+      submit: '전송하기',
+      statusDefault: '전송 후 입력한 이메일로 회신됩니다.',
+      statusSending: '전송 중...',
+      statusSuccess: '전송되었습니다. 확인 후 입력한 이메일로 회신드리겠습니다.',
+      statusError: '전송에 실패했습니다.',
+      statusServerHint: '전송에 실패했습니다. 로컬 서버 실행 여부를 확인해 주세요.'
+    },
+    detail: { kicker: 'Product Detail', close: 'Close' }
+  },
+  en: {
+    nav: ['Core Services', 'Capability', 'Company', 'Contact'],
+    heroKicker: 'KCGsoft / Seoul / Urban Mobility Systems',
+    heroTitle: '<span class="hero-brand">KCG soft</span> <span class="hero-rest">sets a new standard</span><br /><span class="hero-rest">for urban mobility.</span>',
+    heroFocus: 'Current Focus',
+    heroFocusText: 'We connect service architecture, field process, location data, and access control into one operational system.',
+    heroCta: 'Contact Us',
+    capabilityTitle: 'How can we connect bus operation data<br />in one flow?',
+    capabilitySummary: 'From fleet control and in-house ERP integration to fuel charging data and data-driven route design,<br />we provide everything in one operating workflow.',
+    capabilitySteps: [
+      ['Data-driven Route Design', 'Fleet size / Stops / Efficiency analysis'],
+      ['Fleet Control Service', 'Live location / Operation status / Boarding flow'],
+      ['ERP Integration', 'Dispatch / Settlement / Logs / Operations'],
+      ['Fuel Charging Data', 'Charging status / Field history / Ops data']
+    ],
+    focusNote: 'Not fragmented data, but one integrated operation flow',
+    focusTitle: 'We deliver the exact solutions bus operators need in one package.',
+    insights: [
+      ['Insight A', 'See operation status at a glance.', 'Unify scattered data and speed up field decisions.'],
+      ['Insight B', 'Daily data becomes your operating standard.', 'Decide routes, dispatch, and cost with real metrics.'],
+      ['Insight C', 'Even route changes are data-backed.', 'Make faster decisions with demand, stop, and fleet data.']
+    ],
+    capabilityCta: 'View KCGsoft Integrated Solution',
+    ticker: ['Wonder Shuttle', 'Wonder Linx', 'Wonder Hydro', 'Wonder FMS', 'Catchloc'],
+    serviceHeadKicker: 'Index / Core Services',
+    serviceHeadTitle: 'KCGsoft Core Service Lineup',
+    serviceHeadSummary: 'From Wonder Shuttle to Catchloc, all our expertise in one lineup.',
+    serviceDetailOpen: 'View Details',
+    serviceDetailClose: 'Close',
+    clientsKicker: 'Clients / Powered by Catchloc',
+    clientsTitle: 'Partner Client',
+    clientsDesc: 'KCG soft supports operations across numerous partner companies.',
+    trustKicker: 'KCGsoft Service Overview',
+    trustTitle: 'Operations-Centered Mobility Services',
+    trustCards: [
+      ['01. Real-time Control', 'Monitor vehicles and routes in real time on one platform.'],
+      ['02. Route Design', 'Design optimal routes and improve operating efficiency with data.'],
+      ['03. Hydrogen Charging Ops', 'Stabilize charging operations through station linkage and management.'],
+      ['04. Charter Bus ERP', 'Integrate the full process from booking to settlement.'],
+      ['05. GPS Tracking', 'Securely manage vehicle location and trip history with precise GPS.'],
+      ['06. Data Reporting', 'Support faster and more accurate decisions with visualized reports.'],
+      ['07. Customization', 'Flexibly provide features and processes tailored to each business.'],
+      ['08. Operational Support', 'Drive success with expert consulting and continuous tech support.']
+    ],
+    trustCta: 'Request Introduction',
+    footer: [
+      'KCGsoft Co., Ltd. | CEO: Sooyeon Jeon',
+      'Address: #903, 89 Seongsuil-ro, Seongdong-gu, Seoul, Republic of Korea',
+      'Business Registration No.: 611-86-03271 | E-commerce Registration: 2024-SeoulSeongdong-1589 | Job Information Service: J1202020250001',
+      'Copyright ⓒ 2026 KCGsoft All rights reserved.'
+    ],
+    contact: {
+      kicker: 'Contact',
+      title: 'Contact Us',
+      close: 'Close',
+      labels: ['Name', 'Company', 'Phone', 'Email', 'Subject', 'Message', 'Website'],
+      submit: 'Send',
+      statusDefault: 'We will reply to your email after submission.',
+      statusSending: 'Sending...',
+      statusSuccess: 'Sent successfully. We will reply to your email shortly.',
+      statusError: 'Failed to send.',
+      statusServerHint: 'Failed to send. Please check if the local server is running.'
+    },
+    detail: { kicker: 'Product Detail', close: 'Close' }
+  },
+  ja: {
+    nav: ['Core Services', 'Capability', 'Company', 'Contact'],
+    heroKicker: 'KCGsoft / Seoul / Urban Mobility Systems',
+    heroTitle: '<span class="hero-brand">KCG softは</span> <span class="hero-rest">都市モビリティの新しい基準を</span><br /><span class="hero-rest">つくります。</span>',
+    heroFocus: 'Current Focus',
+    heroFocusText: '運用可能なサービス構造、現場プロセス、位置データ、権限制御を一つの運用システムとして統合します。',
+    heroCta: 'お問い合わせ',
+    capabilityTitle: 'バス会社の運用データを<br />どう一度に連携するか？',
+    capabilitySummary: '車両管制、社内ERP連携、燃料充電データ、データベース路線設計まで。<br />同一の運用フローで提供します。',
+    capabilitySteps: [
+      ['データ基盤の路線設計', '増減車 / 停留所 / 効率化判断'],
+      ['車両管制サービス', 'リアルタイム位置 / 運行状態 / 乗車フロー'],
+      ['ERP連携', '配車 / 精算 / 履歴 / 運用記録'],
+      ['燃料充電データ', '充電状況 / 現場履歴 / 運用データ']
+    ],
+    focusNote: '分散データではなく、運用フローの統合',
+    focusTitle: 'バス会社が必要とするソリューションを一括提供します。',
+    insights: [
+      ['Insight A', '運行状況を一目で把握。', '散在データを統合し現場判断を高速化。'],
+      ['Insight B', '日々のデータが運用基準に。', '感覚ではなく指標で判断。'],
+      ['Insight C', '路線変更もデータ根拠で。', '需要・停留所・車両データで迅速に意思決定。']
+    ],
+    capabilityCta: 'KCGsoft統合ソリューションを見る',
+    ticker: ['Wonder Shuttle', 'Wonder Linx', 'Wonder Hydro', 'Wonder FMS', 'Catchloc'],
+    serviceHeadKicker: 'Index / Core Services',
+    serviceHeadTitle: 'KCGsoft コアサービスラインナップ',
+    serviceHeadSummary: 'Wonder ShuttleからCatchlocまで、蓄積したノウハウを一つに。',
+    serviceDetailOpen: '詳細を見る',
+    serviceDetailClose: '閉じる',
+    clientsKicker: 'Clients / Powered by Catchloc',
+    clientsTitle: 'Partner Client',
+    clientsDesc: '多くの企業の運用現場でKCG softが共にしています。',
+    trustKicker: 'KCGsoft Service Overview',
+    trustTitle: '運用中心モビリティサービス',
+    trustCards: [
+      ['01. リアルタイム管制', '統合管制プラットフォームで車両と路線を監視。'],
+      ['02. 路線設計', 'データ基盤で最適路線を設計し効率向上。'],
+      ['03. 水素充電運用', '充電所連携と運用管理で安定運用を支援。'],
+      ['04. 貸切バスERP', '予約から精算まで全工程を統合管理。'],
+      ['05. GPS位置追跡', '高精度GPSで位置と運行履歴を安全管理。'],
+      ['06. データレポート', '可視化レポートで迅速かつ正確な意思決定。'],
+      ['07. カスタマイズ', '業務環境に合わせ機能とプロセスを柔軟提供。'],
+      ['08. 運用支援', '専門コンサルと継続技術支援で成功運用を実現。']
+    ],
+    trustCta: '導入問い合わせ',
+    footer: [
+      '株式会社KCGsoft | 代表者: チョン・スヨン',
+      '住所: ソウル特別市 城東区 聖水一路89, 903号',
+      '事業者登録番号: 611-86-03271 | 通信販売業届出: 2024-ソウル城東-1589号 | 職業情報提供事業届出: J1202020250001',
+      'Copyright ⓒ 2026 KCGsoft All rights reserved.'
+    ],
+    contact: {
+      kicker: 'Contact',
+      title: 'お問い合わせ',
+      close: '閉じる',
+      labels: ['お名前', '会社名', '連絡先', 'メール', '件名', 'お問い合わせ内容', 'Website'],
+      submit: '送信',
+      statusDefault: '送信後、入力したメールに返信します。',
+      statusSending: '送信中...',
+      statusSuccess: '送信完了しました。確認後メールで返信します。',
+      statusError: '送信に失敗しました。',
+      statusServerHint: '送信に失敗しました。ローカルサーバー実行を確認してください。'
+    },
+    detail: { kicker: 'Product Detail', close: '閉じる' }
+  },
+  zh: {
+    nav: ['Core Services', 'Capability', 'Company', 'Contact'],
+    heroKicker: 'KCGsoft / Seoul / Urban Mobility Systems',
+    heroTitle: '<span class="hero-brand">KCG soft</span> <span class="hero-rest">正在打造城市出行的</span><br /><span class="hero-rest">全新标准。</span>',
+    heroFocus: 'Current Focus',
+    heroFocusText: '将可运营的服务架构、现场流程、位置数据与权限控制整合为一套运营系统。',
+    heroCta: '联系我们',
+    capabilityTitle: '如何一次性打通<br />巴士公司的运营数据？',
+    capabilitySummary: '从车辆管制、企业ERP联动、燃料充电数据到数据化线路设计，<br />统一在同一运营流程中提供。',
+    capabilitySteps: [
+      ['数据驱动线路设计', '增减车辆 / 站点 / 效率判断'],
+      ['车辆管制服务', '实时位置 / 运行状态 / 乘车流程'],
+      ['ERP联动', '派车 / 结算 / 历史 / 运营记录'],
+      ['燃料充电数据', '充电状态 / 现场历史 / 运营数据']
+    ],
+    focusNote: '不是分散数据，而是运营流程一体化',
+    focusTitle: '一次提供巴士企业真正需要的解决方案。',
+    insights: [
+      ['Insight A', '一眼掌握运营现状。', '汇总分散数据，提升现场决策速度。'],
+      ['Insight B', '每日数据成为运营标准。', '用真实指标而非经验进行决策。'],
+      ['Insight C', '线路调整也有数据依据。', '基于需求、站点和车辆数据快速决策。']
+    ],
+    capabilityCta: '查看KCGsoft一体化方案',
+    ticker: ['Wonder Shuttle', 'Wonder Linx', 'Wonder Hydro', 'Wonder FMS', 'Catchloc'],
+    serviceHeadKicker: 'Index / Core Services',
+    serviceHeadTitle: 'KCGsoft 核心服务矩阵',
+    serviceHeadSummary: '从Wonder Shuttle到Catchloc，沉淀经验一次呈现。',
+    serviceDetailOpen: '查看详情',
+    serviceDetailClose: '关闭',
+    clientsKicker: 'Clients / Powered by Catchloc',
+    clientsTitle: 'Partner Client',
+    clientsDesc: 'KCG soft 正在众多企业运营现场稳定服务。',
+    trustKicker: 'KCGsoft Service Overview',
+    trustTitle: '以运营为中心的出行服务',
+    trustCards: [
+      ['01. 实时管制', '在统一管制平台实时监控车辆与线路。'],
+      ['02. 线路设计', '基于数据设计最优线路并提升效率。'],
+      ['03. 氢能充电运营', '通过充电站联动与运营管理保障稳定运行。'],
+      ['04. 包车ERP', '从预约到结算全流程一体化管理。'],
+      ['05. GPS位置追踪', '以高精度GPS安全管理位置与运营记录。'],
+      ['06. 数据报告', '通过可视化报告支持快速准确决策。'],
+      ['07. 定制化', '按企业业务环境灵活提供功能与流程。'],
+      ['08. 运营支持', '以专业咨询与持续技术支持保障成功运营。']
+    ],
+    trustCta: '申请演示',
+    footer: [
+      'KCGsoft株式会社 | 代表人: 全秀妍',
+      '地址: 首尔特别市 城东区 圣水一路89号 903室',
+      '营业执照号: 611-86-03271 | 电商备案: 2024-首尔城东-1589号 | 职业信息服务备案: J1202020250001',
+      'Copyright ⓒ 2026 KCGsoft All rights reserved.'
+    ],
+    contact: {
+      kicker: 'Contact',
+      title: '联系我们',
+      close: '关闭',
+      labels: ['姓名', '公司名', '联系方式', '邮箱', '标题', '咨询内容', 'Website'],
+      submit: '发送',
+      statusDefault: '提交后我们将通过您填写的邮箱回复。',
+      statusSending: '发送中...',
+      statusSuccess: '发送成功，我们将尽快回复您的邮箱。',
+      statusError: '发送失败。',
+      statusServerHint: '发送失败，请确认本地服务器是否已运行。'
+    },
+    detail: { kicker: 'Product Detail', close: '关闭' }
+  }
+};
+
+const I18N_ATLAS_META = {
+  ko: serviceAtlasMeta,
+  en: {
+    'wonder-linx': { tag: 'Data-driven Intelligent Route Design', title: 'WONDER LINX', text: 'A service that supports precise route planning through analysis, editing, optimization, and ETA prediction.', pills: ['Route Analysis', 'Optimal Route', 'Travel Time'] },
+    'wonder-shuttle': { tag: 'Integrated Bus Control Service', title: 'WONDER SHUTTLE', text: 'An operations solution that checks live location, route operations, and boarding in one interface.', pills: ['Live Location', 'Route Control', 'Boarding Data'] },
+    'wonder-hydro': { tag: 'Hydrogen Charging Operations', title: 'WONDER HYDRO', text: 'Manage charging status, history, and operation flow in one view.', pills: ['Charging Status', 'History', 'Field Ops'] },
+    'wonder-fms': { tag: 'Charter Bus ERP', title: 'WONDER FMS', text: 'A bus-focused FMS integrating operation records, costs, route P/L, and dashboard metrics.', pills: ['Cost Integration', 'Route P/L', 'Custom Dashboard'] },
+    catchloc: { tag: 'GPS Tracking Solution', title: 'CATCHLOC', text: 'Track vehicles/assets in real time and manage movement history and status.', pills: ['GPS Tracking', 'Movement History', 'Status Control'] }
+  },
+  ja: {
+    'wonder-linx': { tag: 'データ基盤の知能型路線設計', title: 'WONDER LINX', text: '分析・修正・最適経路・所要時間予測で、より精密な路線設計を支援します。', pills: ['路線分析', '最適経路', '運行時間'] },
+    'wonder-shuttle': { tag: 'バス統合管制サービス', title: 'WONDER SHUTTLE', text: 'リアルタイム位置、路線運用、乗車管理を一画面で確認できます。', pills: ['リアルタイム位置', '路線管理', '乗車データ'] },
+    'wonder-hydro': { tag: '水素充電統合管理', title: 'WONDER HYDRO', text: '充電状態・履歴・運用フローを一画面で管理します。', pills: ['充電状態', '履歴管理', '現場運用'] },
+    'wonder-fms': { tag: '貸切バスERP統合管理', title: 'WONDER FMS', text: '運行記録・費用・路線損益を統合し、指標を可視化するFMSです。', pills: ['費用統合管理', '路線損益', 'カスタムダッシュボード'] },
+    catchloc: { tag: 'GPS位置追跡ソリューション', title: 'CATCHLOC', text: '車両と資産の位置をリアルタイム把握し、履歴と状態を管理します。', pills: ['GPS追跡', '移動履歴', '状態管理'] }
+  },
+  zh: {
+    'wonder-linx': { tag: '数据驱动智能线路设计', title: 'WONDER LINX', text: '通过分析、修正、最优路径与时长预测，提升线路设计精度。', pills: ['线路分析', '最优路径', '运行时长'] },
+    'wonder-shuttle': { tag: '巴士一体化管制服务', title: 'WONDER SHUTTLE', text: '在一个界面查看实时位置、线路运营与乘车管理。', pills: ['实时位置', '线路管理', '乘车数据'] },
+    'wonder-hydro': { tag: '氢能充电一体化管理', title: 'WONDER HYDRO', text: '在一个界面管理充电状态、历史与运营流程。', pills: ['充电状态', '历史管理', '现场运营'] },
+    'wonder-fms': { tag: '包车ERP一体化管理', title: 'WONDER FMS', text: '整合运营记录、费用与线路损益，并通过仪表盘统一查看。', pills: ['费用整合', '线路损益', '定制仪表盘'] },
+    catchloc: { tag: 'GPS位置追踪方案', title: 'CATCHLOC', text: '实时查看车辆与资产位置并管理移动历史和状态。', pills: ['GPS追踪', '移动历史', '状态管理'] }
+  }
+};
+
+const I18N_VISUAL_MARKUP = {
+  ko: { shuttle: wonderShuttleVisualMarkup, linx: wonderLinxVisualMarkup, hydro: wonderHydroVisualMarkup, fms: wonderFmsVisualMarkup, catchloc: catchlocVisualMarkup },
+  en: {
+    shuttle: `
+      <div class="shuttle-visual-cards">
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-app" aria-hidden="true"></span>
+          <h4>01. Bus App</h4>
+          <p>Driver app receives location data<br />and passenger QR tags</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-server" aria-hidden="true"></span>
+          <h4>02. Server Sync</h4>
+          <p>Location and boarding records<br />are sent and stored on server</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-ticket" aria-hidden="true"></span>
+          <h4>03. Ticket Issue/Scan</h4>
+          <p>Issue tickets in app and scan<br />from driver app for boarding</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-bus" aria-hidden="true"></span>
+          <h4>04. Live Bus Tracking</h4>
+          <p>Users check real-time location<br />of their assigned bus</p>
+        </article>
+      </div>
+    `,
+    linx: `
+      <div class="linx-visual-cards">
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-route" aria-hidden="true"></span>
+          <h4>01. Create/Edit Route</h4>
+          <p>Create new stops and paths<br />and flexibly revise routes</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-merge" aria-hidden="true"></span>
+          <h4>02. Duplicate Merge</h4>
+          <p>Analyze duplicate stops/routes<br />and merge lines by data</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-path" aria-hidden="true"></span>
+          <h4>03. Best Route Search</h4>
+          <p>Find optimal operation paths<br />based on stop/route data</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-time" aria-hidden="true"></span>
+          <h4>04. Time Simulation</h4>
+          <p>Simulate expected travel time<br />and operation flow</p>
+        </article>
+      </div>
+    `,
+    hydro: `
+      <div class="hydro-visual-cards">
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-register" aria-hidden="true"></span>
+          <h4>01. Bus Info Input</h4>
+          <p>Register hydrogen buses with route data<br />for lifecycle management</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-station" aria-hidden="true"></span>
+          <h4>02. Station Match</h4>
+          <p>Assign nearest hydrogen station<br />based on route location</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-usage" aria-hidden="true"></span>
+          <h4>03. Charge Metrics</h4>
+          <p>Aggregate charge amount, count, and fuel economy<br />to calculate operation efficiency</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-dashboard" aria-hidden="true"></span>
+          <h4>04. Unified Dashboard</h4>
+          <p>Review total charging and key metrics<br />at a glance</p>
+        </article>
+      </div>
+    `,
+    fms: `
+      <div class="fms-visual-cards">
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-ops" aria-hidden="true"></span>
+          <h4>01. Vehicle Records</h4>
+          <p>Manage operation and maintenance history<br />for all registered buses</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-cost" aria-hidden="true"></span>
+          <h4>02. Cost Integration</h4>
+          <p>Integrate expense and fuel spend<br />for clear cost visibility</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-profit" aria-hidden="true"></span>
+          <h4>03. Route P/L Analysis</h4>
+          <p>Compare route revenue and cost<br />to derive profitability</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-dashboard" aria-hidden="true"></span>
+          <h4>04. Custom Dashboard</h4>
+          <p>Combine org and partner data<br />to view sales and spend in one place</p>
+        </article>
+      </div>
+    `,
+    catchloc: `
+      <div class="catchloc-visual-cards">
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-gps" aria-hidden="true"></span>
+          <h4>01. GPS Collection</h4>
+          <p>Collect vehicle GPS data in real time<br />to track operation flow</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-boarding" aria-hidden="true"></span>
+          <h4>02. Boarding Data</h4>
+          <p>Capture boarding records<br />and integrate demand data</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-admin" aria-hidden="true"></span>
+          <h4>03. Enterprise Custom</h4>
+          <p>Customize features for each<br />company operation style</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-analytics" aria-hidden="true"></span>
+          <h4>04. Raw Data Export</h4>
+          <p>Export to Excel and process<br />for KPI analysis</p>
+        </article>
+      </div>
+    `
+  },
+  ja: {
+    shuttle: `
+      <div class="shuttle-visual-cards">
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-app" aria-hidden="true"></span>
+          <h4>01. バス専用アプリ</h4>
+          <p>運転手アプリで位置受信と<br />乗客QRタグを入力</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-server" aria-hidden="true"></span>
+          <h4>02. サーバー連携</h4>
+          <p>位置記録と乗客情報を<br />サーバーへ送信・保存</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-ticket" aria-hidden="true"></span>
+          <h4>03. 乗車券発行・スキャン</h4>
+          <p>アプリで発行した乗車券を<br />運転手アプリでスキャンして乗車</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-bus" aria-hidden="true"></span>
+          <h4>04. リアルタイム確認</h4>
+          <p>利用者が乗車予定バスの<br />現在位置をリアルタイム確認</p>
+        </article>
+      </div>
+    `,
+    linx: `
+      <div class="linx-visual-cards">
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-route" aria-hidden="true"></span>
+          <h4>01. 路線作成・修正</h4>
+          <p>新規路線の停留所・経路を作成し<br />既存路線を柔軟に修正</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-merge" aria-hidden="true"></span>
+          <h4>02. 重複分析・統廃合</h4>
+          <p>重複する停留所・経路を分析し<br />データ基盤で路線を統廃合</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-path" aria-hidden="true"></span>
+          <h4>03. 最適経路探索</h4>
+          <p>停留所・経路データを基に<br />最適な運行経路を探索</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-time" aria-hidden="true"></span>
+          <h4>04. 時間シミュレーション</h4>
+          <p>新路線の想定所要時間と<br />運行フローをシミュレーション</p>
+        </article>
+      </div>
+    `,
+    hydro: `
+      <div class="hydro-visual-cards">
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-register" aria-hidden="true"></span>
+          <h4>01. 水素バス情報入力</h4>
+          <p>水素バスを路線情報と共に登録し<br />履歴を管理</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-station" aria-hidden="true"></span>
+          <h4>02. 充電所情報確認</h4>
+          <p>路線基準で最も近い水素充電所を<br />確認して配分</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-usage" aria-hidden="true"></span>
+          <h4>03. 充電実績集計</h4>
+          <p>充電量・回数・燃費を集計し<br />運行効率を算出</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-dashboard" aria-hidden="true"></span>
+          <h4>04. 統合ダッシュボード</h4>
+          <p>総充電量と主要指標を<br />一目で確認</p>
+        </article>
+      </div>
+    `,
+    fms: `
+      <div class="fms-visual-cards">
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-ops" aria-hidden="true"></span>
+          <h4>01. 車両記録管理</h4>
+          <p>登録車両の運行記録と<br />整備履歴を統合管理</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-cost" aria-hidden="true"></span>
+          <h4>02. 支出データ統合</h4>
+          <p>経費・燃料費を統合し<br />コストの流れを可視化</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-profit" aria-hidden="true"></span>
+          <h4>03. 路線損益分析</h4>
+          <p>路線別の売上と支出を比較し<br />損益指標を算出</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-dashboard" aria-hidden="true"></span>
+          <h4>04. カスタムダッシュボード</h4>
+          <p>組織・取引先データを統合し<br />売上・支出を一目で確認</p>
+        </article>
+      </div>
+    `,
+    catchloc: `
+      <div class="catchloc-visual-cards">
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-gps" aria-hidden="true"></span>
+          <h4>01. GPS位置収集</h4>
+          <p>車両GPS位置をリアルタイム収集し<br />運行フローを追跡</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-boarding" aria-hidden="true"></span>
+          <h4>02. 乗車データ収集</h4>
+          <p>乗降データを収集して<br />運行・需要データを統合</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-admin" aria-hidden="true"></span>
+          <h4>03. 企業カスタマイズ</h4>
+          <p>企業の運営方式に合わせて<br />柔軟にカスタム可能</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-analytics" aria-hidden="true"></span>
+          <h4>04. ローデータ抽出</h4>
+          <p>データをExcelで保存・抽出後<br />加工して主要指標を分析</p>
+        </article>
+      </div>
+    `
+  },
+  zh: {
+    shuttle: `
+      <div class="shuttle-visual-cards">
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-app" aria-hidden="true"></span>
+          <h4>01. 巴士专用应用</h4>
+          <p>司机端接收位置信息并录入<br />乘客二维码标签</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-server" aria-hidden="true"></span>
+          <h4>02. 服务器同步</h4>
+          <p>位置记录与乘客信息<br />上传并保存到服务器</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-ticket" aria-hidden="true"></span>
+          <h4>03. 票券签发/扫码</h4>
+          <p>在应用中发券后由司机端<br />扫码完成乘车</p>
+        </article>
+        <span class="shuttle-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="shuttle-visual-card">
+          <span class="shuttle-card-icon is-bus" aria-hidden="true"></span>
+          <h4>04. 实时巴士查看</h4>
+          <p>用户可实时查看<br />预约车辆当前位置</p>
+        </article>
+      </div>
+    `,
+    linx: `
+      <div class="linx-visual-cards">
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-route" aria-hidden="true"></span>
+          <h4>01. 线路创建/修改</h4>
+          <p>创建新线路站点与路径<br />并灵活调整既有线路</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-merge" aria-hidden="true"></span>
+          <h4>02. 重复分析/整合</h4>
+          <p>分析重复站点与路径<br />并基于数据整合线路</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-path" aria-hidden="true"></span>
+          <h4>03. 最优路径搜索</h4>
+          <p>基于站点与路径数据<br />搜索最优运营路径</p>
+        </article>
+        <span class="linx-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="linx-visual-card">
+          <span class="linx-card-icon is-time" aria-hidden="true"></span>
+          <h4>04. 时间模拟</h4>
+          <p>模拟新线路预计耗时<br />与运营流程</p>
+        </article>
+      </div>
+    `,
+    hydro: `
+      <div class="hydro-visual-cards">
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-register" aria-hidden="true"></span>
+          <h4>01. 氢能巴士信息录入</h4>
+          <p>将氢能巴士与线路信息一并登记<br />并进行履历管理</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-station" aria-hidden="true"></span>
+          <h4>02. 充电站信息确认</h4>
+          <p>按线路匹配最近的氢能充电站<br />并完成分配</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-usage" aria-hidden="true"></span>
+          <h4>03. 充电实绩统计</h4>
+          <p>汇总充电量、次数与能耗<br />计算运营效率指标</p>
+        </article>
+        <span class="hydro-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="hydro-visual-card">
+          <span class="hydro-card-icon is-dashboard" aria-hidden="true"></span>
+          <h4>04. 统一仪表盘</h4>
+          <p>总充电量与关键指标<br />一屏总览</p>
+        </article>
+      </div>
+    `,
+    fms: `
+      <div class="fms-visual-cards">
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-ops" aria-hidden="true"></span>
+          <h4>01. 车辆记录管理</h4>
+          <p>统一管理公司车辆的运行记录<br />与维护履历</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-cost" aria-hidden="true"></span>
+          <h4>02. 支出数据整合</h4>
+          <p>整合经费与燃料支出<br />清晰掌握成本流向</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-profit" aria-hidden="true"></span>
+          <h4>03. 线路损益分析</h4>
+          <p>对比线路收入与支出<br />产出损益指标</p>
+        </article>
+        <span class="fms-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="fms-visual-card">
+          <span class="fms-card-icon is-dashboard" aria-hidden="true"></span>
+          <h4>04. 定制仪表盘</h4>
+          <p>整合组织与合作方数据<br />一眼查看收支现状</p>
+        </article>
+      </div>
+    `,
+    catchloc: `
+      <div class="catchloc-visual-cards">
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-gps" aria-hidden="true"></span>
+          <h4>01. GPS位置采集</h4>
+          <p>实时采集车辆GPS位置<br />追踪运营流程</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-boarding" aria-hidden="true"></span>
+          <h4>02. 乘车数据采集</h4>
+          <p>采集乘客上下车数据<br />整合运营与需求信息</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-admin" aria-hidden="true"></span>
+          <h4>03. 企业定制化</h4>
+          <p>可按企业运营方式<br />灵活定制功能</p>
+        </article>
+        <span class="catchloc-visual-arrow" aria-hidden="true">&gt;</span>
+        <article class="catchloc-visual-card">
+          <span class="catchloc-card-icon is-analytics" aria-hidden="true"></span>
+          <h4>04. 原始数据导出</h4>
+          <p>数据导出至Excel后再加工<br />用于核心指标分析</p>
+        </article>
+      </div>
+    `
+  }
+};
+
+function cloneDeep(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function setText(selector, text) {
+  const el = document.querySelector(selector);
+  if (el) el.textContent = text;
+}
+
+function setHtml(selector, html) {
+  const el = document.querySelector(selector);
+  if (el) el.innerHTML = html;
+}
+
+function applyLanguage(lang) {
+  const locale = I18N_UI[lang] ? lang : 'ko';
+  currentLang = locale;
+  localStorage.setItem(LANG_STORAGE_KEY, locale);
+  document.documentElement.lang = LANG_HTML_CODE[locale] || 'ko';
+
+  const ui = I18N_UI[locale];
+  const navLinks = document.querySelectorAll('.site-nav a');
+  navLinks.forEach((link, index) => { if (ui.nav[index]) link.textContent = ui.nav[index]; });
+  const ticker = document.querySelectorAll('.ticker-link');
+  ticker.forEach((link, index) => { if (ui.ticker[index]) link.textContent = ui.ticker[index]; });
+
+  setText('.brand-copy', 'mobility technology partner');
+  setText('.hero-overlay .section-kicker', ui.heroKicker);
+  setHtml('.hero-message h1', ui.heroTitle);
+  setText('.hero-note span', ui.heroFocus);
+  setText('.hero-note p', ui.heroFocusText);
+  setText('.hero-cta', ui.heroCta);
+  setHtml('#capability .capability-open-head h2', ui.capabilityTitle);
+  setHtml('#capability .capability-open-summary', ui.capabilitySummary);
+  setText('#capability .capability-open-step.step-route strong', ui.capabilitySteps[0][0]);
+  setText('#capability .capability-open-step.step-route span', ui.capabilitySteps[0][1]);
+  setText('#capability .capability-open-step.step-control strong', ui.capabilitySteps[1][0]);
+  setText('#capability .capability-open-step.step-control span', ui.capabilitySteps[1][1]);
+  setText('#capability .capability-open-step.step-erp strong', ui.capabilitySteps[2][0]);
+  setText('#capability .capability-open-step.step-erp span', ui.capabilitySteps[2][1]);
+  setText('#capability .capability-open-step.step-fuel strong', ui.capabilitySteps[3][0]);
+  setText('#capability .capability-open-step.step-fuel span', ui.capabilitySteps[3][1]);
+  setText('.capability-open-focus-note', ui.focusNote);
+  setText('.capability-open-core h3', ui.focusTitle);
+
+  const insightArticles = document.querySelectorAll('.capability-open-insights article');
+  insightArticles.forEach((article, idx) => {
+    const set = ui.insights[idx];
+    if (!set) return;
+    const span = article.querySelector('span');
+    const h3 = article.querySelector('h3');
+    const p = article.querySelector('p');
+    if (span) span.textContent = set[0];
+    if (h3) h3.textContent = set[1];
+    if (p) p.textContent = set[2];
+  });
+  setText('.capability-open-cta button', ui.capabilityCta);
+
+  setText('#service-intro .section-head-copy .section-kicker', ui.serviceHeadKicker);
+  setText('#service-intro .section-head-copy h2', ui.serviceHeadTitle);
+  setText('#service-intro .section-head-copy .section-summary', ui.serviceHeadSummary);
+  setText('.client-marquee-head .section-kicker', ui.clientsKicker);
+  setText('.client-marquee-copy h3', ui.clientsTitle);
+  setText('.client-marquee-copy p', ui.clientsDesc);
+
+  setText('#company .service-trust-head .section-kicker', ui.trustKicker);
+  setText('#company .service-trust-head h2', ui.trustTitle);
+  const trustCards = document.querySelectorAll('#company .service-trust-card');
+  trustCards.forEach((card, idx) => {
+    const data = ui.trustCards[idx];
+    if (!data) return;
+    const h3 = card.querySelector('h3');
+    const p = card.querySelector('p');
+    if (h3) h3.textContent = data[0];
+    if (p) p.textContent = data[1];
+  });
+  setText('#company .service-trust-cta button', ui.trustCta);
+  setText('#company .service-trust-cta button span', '→');
+
+  const footerLines = document.querySelectorAll('.footer-copy p');
+  footerLines.forEach((line, idx) => {
+    if (ui.footer[idx]) line.textContent = ui.footer[idx];
+  });
+
+  setText('.contact-panel-head .section-kicker', ui.contact.kicker);
+  setText('#contact-title', ui.contact.title);
+  setText('.contact-close', ui.contact.close);
+  const formLabels = document.querySelectorAll('.contact-form .contact-field span, .contact-honeypot span');
+  formLabels.forEach((label, idx) => {
+    if (ui.contact.labels[idx]) label.textContent = ui.contact.labels[idx];
+  });
+  setText('.contact-submit', ui.contact.submit);
+  if (contactStatus) contactStatus.textContent = ui.contact.statusDefault;
+
+  setText('.detail-panel-head .section-kicker', ui.detail.kicker);
+  setText('.detail-close', ui.detail.close);
+
+  langButtons.forEach((btn) => {
+    btn.classList.toggle('is-active', btn.dataset.lang === locale);
+  });
+
+  serviceAtlasMeta = cloneDeep(I18N_ATLAS_META[locale] || I18N_ATLAS_META.ko);
+  const visual = I18N_VISUAL_MARKUP[locale] || I18N_VISUAL_MARKUP.ko;
+  wonderShuttleVisualMarkup = visual.shuttle;
+  wonderLinxVisualMarkup = visual.linx;
+  wonderHydroVisualMarkup = visual.hydro;
+  wonderFmsVisualMarkup = visual.fms;
+  catchlocVisualMarkup = visual.catchloc;
+
+  updateAtlasPreview(selectedAtlasKey, { animate: false });
+  if (atlasDetailKey) {
+    openAtlasDetailView(selectedAtlasKey, { keepPage: true });
+  }
+  if (openedKey) {
+    renderDetail(openedKey);
+    goToDetailPage(activePageIndex, true);
+  }
+  if (serviceAtlasPreviewBtn && !atlasDetailKey) {
+    serviceAtlasPreviewBtn.textContent = ui.serviceDetailOpen;
+  }
+}
 
 function updateAtlasVisual(key) {
   if (!serviceAtlasVisual) return;
@@ -479,7 +1308,8 @@ function updateAtlasPreview(key, options = {}) {
     if (serviceAtlasPills) {
       const pills = serviceAtlasPills.querySelectorAll('span');
       pills.forEach((pill, index) => {
-        pill.textContent = meta.pills[index] || '';
+        const label = meta.pills[index] || '';
+        pill.textContent = label ? `#${label}` : '';
       });
     }
     if (serviceAtlasPreviewBtn) {
@@ -607,7 +1437,7 @@ function openAtlasDetailView(key, options = {}) {
     serviceAtlasPreview.classList.add('is-detail-open');
   });
   if (serviceAtlasPreviewBtn) {
-    serviceAtlasPreviewBtn.textContent = '닫기';
+    serviceAtlasPreviewBtn.textContent = I18N_UI[currentLang]?.serviceDetailClose || '닫기';
   }
 }
 
@@ -651,7 +1481,7 @@ function closeAtlasDetailView() {
     atlasDetailCloseTimer = 0;
   }, 220);
   if (serviceAtlasPreviewBtn) {
-    serviceAtlasPreviewBtn.textContent = '자세히 보기';
+    serviceAtlasPreviewBtn.textContent = I18N_UI[currentLang]?.serviceDetailOpen || '자세히 보기';
   }
 }
 
@@ -962,7 +1792,7 @@ function openContact() {
   document.body.classList.add('contact-lock');
   contactForm.reset();
   if (contactStatus) {
-    contactStatus.textContent = '전송 후 입력한 이메일로 회신됩니다.';
+    contactStatus.textContent = I18N_UI[currentLang]?.contact?.statusDefault || '전송 후 입력한 이메일로 회신됩니다.';
   }
   const firstField = contactForm.querySelector('input[name="name"]');
   if (firstField) {
@@ -989,7 +1819,7 @@ async function submitContactForm(event) {
 
   contactSubmitLock = true;
   if (contactStatus) {
-    contactStatus.textContent = '전송 중...';
+    contactStatus.textContent = I18N_UI[currentLang]?.contact?.statusSending || '전송 중...';
   }
 
   try {
@@ -1010,18 +1840,18 @@ async function submitContactForm(event) {
 
     const result = await response.json().catch(() => ({}));
     if (!response.ok) {
-      throw new Error(result.error || '전송에 실패했습니다.');
+      throw new Error(result.error || I18N_UI[currentLang]?.contact?.statusError || '전송에 실패했습니다.');
     }
 
     if (contactStatus) {
-      contactStatus.textContent = '전송되었습니다. 확인 후 입력한 이메일로 회신드리겠습니다.';
+      contactStatus.textContent = I18N_UI[currentLang]?.contact?.statusSuccess || '전송되었습니다. 확인 후 입력한 이메일로 회신드리겠습니다.';
     }
     contactForm.reset();
   } catch (error) {
     if (contactStatus) {
       contactStatus.textContent = error instanceof Error
         ? error.message
-        : '전송에 실패했습니다. 로컬 서버 실행 여부를 확인해 주세요.';
+        : I18N_UI[currentLang]?.contact?.statusServerHint || '전송에 실패했습니다. 로컬 서버 실행 여부를 확인해 주세요.';
     }
   } finally {
     contactSubmitLock = false;
@@ -1180,6 +2010,15 @@ contactCloseTargets.forEach((target) => target.addEventListener('click', closeCo
 if (contactForm) {
   contactForm.addEventListener('submit', submitContactForm);
 }
+langButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const nextLang = button.dataset.lang || 'ko';
+    applyLanguage(nextLang);
+  });
+});
+
+const storedLang = localStorage.getItem(LANG_STORAGE_KEY);
+applyLanguage(storedLang || 'ko');
 
 startHeroRotation();
 setupTickerNavigation();
@@ -1249,6 +2088,7 @@ window.addEventListener('resize', () => {
   syncHeaderOffset();
   scheduleServiceRailUpdate();
 });
+
 
 
 
