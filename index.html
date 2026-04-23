@@ -22,7 +22,7 @@
           <a href="#service-intro">Core Services</a>
           <a href="#capability">Capability</a>
           <a href="#company">Company</a>
-          <a href="#contact">Contact</a>
+          <a href="#contact" data-contact-open>Contact</a>
         </nav>
       </div>
     </header>
@@ -257,42 +257,66 @@
       </section>
 
       <section id="company" class="company-section">
-        <div class="container company-grid">
-          <div class="company-panel company-panel-dark">
-            <p class="section-kicker">Company</p>
-            <h2>이동의 문제를 기술 언어로 바꾸는 팀</h2>
-            <p>
-              KCGsoft는 버스 관제, 노선 설계, 수소 충전, GPS 위치 추적, 전세버스 ERP까지 실제 운영에 필요한 솔루션을 하나의 제품군으로 확장하고 있습니다.
-              단순한 앱 제작이 아니라 운영 가능한 구조를 만드는 것이 이 팀의 기준입니다.
-            </p>
-          </div>
-
-          <div class="company-panel company-panel-light">
-            <div class="fact-row">
-              <span>Operating Scope</span>
-              <strong>Shuttle / Linx / Hydro / FMS / Catchloc</strong>
+        <div class="service-trust-shell">
+          <div class="container service-trust-inner">
+            <div class="service-trust-head">
+              <p class="section-kicker">KCGsoft Service Overview</p>
+              <h2>운영 중심 모빌리티 서비스</h2>
             </div>
-            <div class="fact-row">
-              <span>Core Method</span>
-              <strong>운영 + 데이터 + 관제</strong>
+            <div class="service-trust-grid" aria-label="KCGsoft 핵심 서비스 구성">
+              <article class="service-trust-card tone-blue">
+                <h3>01. 실시간 관제</h3>
+                <p>통합 관제 플랫폼으로 차량과 노선을 실시간 모니터링합니다.</p>
+              </article>
+              <article class="service-trust-card tone-green">
+                <h3>02. 노선 설계</h3>
+                <p>데이터 기반으로 최적의 노선을 설계하고 운행 효율을 높입니다.</p>
+              </article>
+              <article class="service-trust-card tone-cyan">
+                <h3>03. 수소 충전 운영</h3>
+                <p>수소 충전소 연계 및 운영 관리를 통해 안정적인 충전 운영을 지원합니다.</p>
+              </article>
+              <article class="service-trust-card tone-pink">
+                <h3>04. 전세버스 ERP</h3>
+                <p>예약부터 정산까지 전세버스 운영의 전 과정을 통합 관리합니다.</p>
+              </article>
+              <article class="service-trust-card tone-violet">
+                <h3>05. GPS 위치 추적</h3>
+                <p>정밀한 GPS 추적으로 차량 위치와 운행 이력을 안전하게 관리합니다.</p>
+              </article>
+              <article class="service-trust-card tone-blue">
+                <h3>06. 데이터 리포트</h3>
+                <p>운영 현황을 시각화한 리포트로 의사결정을 빠르고 정확하게 지원합니다.</p>
+              </article>
+              <article class="service-trust-card tone-yellow">
+                <h3>07. 커스터마이징</h3>
+                <p>고객의 비즈니스 환경에 맞춘 기능과 프로세스를 유연하게 제공합니다.</p>
+              </article>
+              <article class="service-trust-card tone-pink">
+                <h3>08. 운영 지원</h3>
+                <p>전문 컨설팅과 지속적 기술 지원으로 성공적인 운영을 함께합니다.</p>
+              </article>
             </div>
-            <div class="fact-row">
-              <span>Collaboration Type</span>
-              <strong>B2B Service Build</strong>
+            <div class="service-trust-cta">
+              <button type="button" data-contact-open>도입 문의하기 <span aria-hidden="true">→</span></button>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contact" class="contact-section">
-        <div class="container contact-grid">
-          <div>
-            <p class="section-kicker">Contact</p>
-            <h2>모빌리티 서비스 구축, 운영 시스템 개발, 노선 설계 솔루션 도입 문의</h2>
+      <footer id="contact" class="site-footer">
+        <div class="container footer-inner">
+          <a class="footer-brand" href="#top" aria-label="메인 화면으로 이동">
+            <img class="footer-logo" src="logo.png" alt="KCGsoft 로고" />
+          </a>
+          <div class="footer-copy">
+            <p>주식회사 케이씨지소프트 | 대표자명: 전수연</p>
+            <p>주소: 서울특별시 성동구 성수일로 89, 903호(성수동1가, Metamorpho(지식산업센터))</p>
+            <p>사업자등록번호: 611-86-03271 | 통신판매업신고번호: 제2024-서울성동-1589호 | 직업정보제공사업신고번호 J1202020250001</p>
+            <p class="footer-copyright">Copyright ⓒ 2026 KCGsoft All rights reserved.</p>
           </div>
-          <a class="contact-link" href="mailto:contact@kcgsoft.com">contact@kcgsoft.com</a>
         </div>
-      </section>
+      </footer>
 
       <div class="contact-overlay" hidden aria-hidden="true">
         <div class="contact-backdrop" data-contact-close></div>

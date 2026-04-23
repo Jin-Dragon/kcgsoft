@@ -1170,7 +1170,12 @@ detailNav.addEventListener('click', (event) => {
 });
 
 closeTargets.forEach((target) => target.addEventListener('click', closeDetail));
-contactOpenButtons.forEach((button) => button.addEventListener('click', openContact));
+contactOpenButtons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    openContact();
+  });
+});
 contactCloseTargets.forEach((target) => target.addEventListener('click', closeContact));
 if (contactForm) {
   contactForm.addEventListener('submit', submitContactForm);
